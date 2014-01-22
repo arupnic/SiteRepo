@@ -6,9 +6,7 @@
 $(function() {
   $('input[type="submit"]').button();
   $('input[type="reset"]').button();
-//  $('.chzn-select').chosen({width: "250px",
-//    no_results_text: "Oops, nothing found!"
-//  });
+
 
   $('#StartDate').datepicker({
     dateFormat: 'dd-mm-yy',
@@ -40,13 +38,7 @@ $(function() {
     buttonImage: "images/calendar.gif",
     buttonImageOnly: true
   });
-  /**
-   * GetComboData API Call for Caching of MasterData
-   * Options for Blocks are rendered
-   * for Panchayats Stored in
-   * $('#CmbPanchayatCode').data('Panchayats', DataResp.Panchayats);
-   * $('#CmbVillageCode').data('Villages', DataResp.Villages);
-   */
+
   $.ajax({
     type: 'POST',
     url: 'AjaxData.php',
@@ -94,13 +86,13 @@ $(function() {
           .change(function() {
             var Options = '<option value=""></option>';
           });
-  $("#SectorID").chosen({width: "250px",
+  $("#SectorID").chosen({width: "220px",
     no_results_text: "Oops, nothing found!"})
           .change(function() {
             var Options = '<option value=""></option>';
           });
 
-  $("#SchemeID").chosen({width: "250px",
+  $("#SchemeID").chosen({width: "220px",
     no_results_text: "Oops, nothing found!"})
           .change(function() {
             var Options = '<option value=""></option>';
