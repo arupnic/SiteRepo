@@ -5,7 +5,7 @@ WebLib::AuthSession();
 WebLib::Html5Header('Departments');
 WebLib::IncludeCSS();
 WebLib::JQueryInclude();
-WebLib::IncludeJS('mpr/js/forms.js');
+//WebLib::IncludeJS('mpr/js/forms.js');
 WebLib::IncludeJS('mpr/js/mpr.js');
 WebLib::IncludeCSS('mpr/css/forms.css');
 WebLib::IncludeCSS('css/chosen.css');
@@ -31,7 +31,7 @@ WebLib::IncludeJS('js/chosen.jquery.min.js');
               WebLib::ShowMsg();
               ?>
         <fieldset>
-          <legend><h2>Create New Department & Sector </h2></legend>
+          <legend>Create New Department & Sector</legend>
 
           <div class="FieldGroup">
             <label for="DeptName"><span id="myfont">Name of Department</span>
@@ -65,7 +65,8 @@ WebLib::IncludeJS('js/chosen.jquery.min.js');
           </div>
         </fieldset>
         <fieldset>
-          <legend><h2>Create New Scheme</h2></legend>
+          <legend>Create New Scheme</legend>
+
           <div class="FieldGroup">
             <label for="DeptID"><span id="myfont">Select Name of Department</span>
               <select id="DeptID" name="DeptID"
@@ -92,13 +93,12 @@ WebLib::IncludeJS('js/chosen.jquery.min.js');
             <input type="submit" name="CmdSubmit" value="Create Scheme">
             <input type="reset" name="CmdReset" value="Reset">
           </div>
+
           <input type="hidden" name="FormToken"
                  value="<?php echo WebLib::GetVal($_SESSION, 'FormToken') ?>" />
-
         </fieldset>
         <fieldset>
-          <legend><h2>Create New Project </h2>
-          </legend>
+          <legend>Create New Project</legend>
           <?php
           $Data  = new MySQLiDB();
           $Data1 = new MySQLiDBHelper();

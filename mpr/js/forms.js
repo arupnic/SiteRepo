@@ -52,26 +52,4 @@ $(function() {
           .fail(function(msg) {
             $('#Msg').html(msg);
           });
-//  ("#PhysicalSlider").slider({
-//    range: "min",
-//    value: 0,
-//    min: 0,
-//    max: 100,
-//    slide: function(event, ui) {
-//      $("#lblPhysicalProgress").html("Physical Progress: " + ui.value + "%");
-//      $("#PhysicalProgress").val(ui.value);
-//    }
-//  });
-//  $("#FinancialSlider").slider({
-//    range: "min",
-//    value: 0,
-//    min: 0,
-//    max: 100,
-//    slide: function(event, ui) {
-//      $("#lblFinancialProgress").html("Financial Progress: " + ui.value + "%");
-//      $("#FinancialProgress").val(ui.value);
-//    }
-//  });
-//  $("#DeptID").chosen({width: "250px",
-//    no_results_text: "Oops, nothing found!"});
 });

@@ -85,6 +85,7 @@ root {
   width: 500px;
   background: white;
 }
+
 #FinancialSlider .ui-slider-range-min{
   background: #dc3912;
 }
@@ -114,3 +115,9 @@ root {
   margin: 0px;
   padding-left: 0px;
 }
+
+.formWrapper legend{
+  margin: 0px 0px 0px 20px;
+  font-size: 20px;
+}
+

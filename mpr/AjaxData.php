@@ -53,6 +53,29 @@ if (WebLib::GetVal($_POST, 'AjaxToken') === WebLib::GetVal($_SESSION, 'Token')) 
       $DataResp['Projects'] = array();
       doQuery($DataResp['Projects'], $Query);
       break;
+    case 'GetChosenData':
+
+      $Query                 = 'Select `DeptID`,`DeptName`'
+          . ' FROM `' . MySQL_Pre . 'MPR_Departments`'
+          . ' Order by `DeptID`';
+      $DataResp['DeptID']    = array();
+      doQuery($DataResp['DeptID'], $Query);
+      $Query                 = 'Select `SectorID`,`SectorName`'
+          . ' FROM `' . MySQL_Pre . 'MPR_Sectors`'
+          . ' Order by `SectorID`';
+      $DataResp['SectorID']  = array();
+      doQuery($DataResp['SectorID'], $Query);
+      $Query                 = 'Select `SchemeID`,`SchemeName`'
+          . ' FROM `' . MySQL_Pre . 'MPR_Schemes`'
+          . ' Order by `SchemeID`';
+      $DataResp['SchemeID']  = array();
+      doQuery($DataResp['SchemeID'], $Query);
+      $Query                 = 'Select `ProjectID`,`ProjectName`'
+          . ' FROM `' . MySQL_Pre . 'MPR_Projects`'
+          . ' Order by `ProjectID`';
+      $DataResp['ProjectID'] = array();
+      doQuery($DataResp['ProjectID'], $Query);
+      break;
   }
   $_SESSION['Token']     = md5($_SERVER['REMOTE_ADDR'] . session_id() . $_SESSION['ET']);
   $_SESSION['LifeTime']  = time();

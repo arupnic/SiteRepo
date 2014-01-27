@@ -39,6 +39,28 @@ $(function() {
     buttonImageOnly: true
   });
 
+  $("#DeptID")
+          .chosen({width: "200px",
+            no_results_text: "Oops, nothing found!"})
+          .change(function() {
+            var Options = '<option value=""></option>';
+          });
+  $("#SectorID").chosen({width: "200px",
+    no_results_text: "Oops, nothing found!"})
+          .change(function() {
+            var Options = '<option value=""></option>';
+          });
+  $("#SchemeID").chosen({width: "200px",
+    no_results_text: "Oops, nothing found!"})
+          .change(function() {
+            var Options = '<option value=""></option>';
+          });
+  $("#ProjectID").chosen({width: "200px",
+    no_results_text: "Oops, nothing found!"})
+          .change(function() {
+            var Options = '<option value=""></option>';
+          });
+
   $.ajax({
     type: 'POST',
     url: 'AjaxData.php',
@@ -48,7 +70,7 @@ $(function() {
     },
     data: {
       'AjaxToken': $('#AjaxToken').val(),
-      'CallAPI': 'GetComboData'
+      'CallAPI': 'GetChosenData'
     }
   }).done(function(data) {
     try {
@@ -58,19 +80,51 @@ $(function() {
       $('#Msg').html(DataResp.Msg);
       $('#ED').html(DataResp.RT);
       var Options = '<option value=""></option>';
-      $.each(DataResp.Depts.Data,
+      $.each(DataResp.DeptID,
               function(index, value) {
+                //option for Departments...
                 Options += '<option value="' + value.DeptID + '">'
                         + value.DeptID + ' - ' + value.DeptName
                         + '</option>';
               });
-      $('#CmbDeptID').html(Options)
+      $('#DeptID').html(Options)
               .trigger("chosen:updated");
-      $('#CmbSectorID').data('Sectors', DataResp.Sectors);
-      $('#CmbSchemeID').data('Schemes', DataResp.Schemes);
-      $('#CmbProjectID').data('Projects', DataResp.Projects);
+      $('#DeptID').data('DeptID', DataResp.DeptID);
+      //option for Sectors..
+      Options = '<option value=""></option>';
+      $.each(DataResp.SectorID,
+              function(index, value) {
+                Options += '<option value="' + value.SectorID + '">'
+                        + value.SectorID + ' - ' + value.SectorName
+                        + '</option>';
+              });
+      $('#SectorID').html(Options)
+              .trigger("chosen:updated");
+      $('#SectorID').data('SectorID', DataResp.SectorID);
+      //option for Schemes...
+      Options = '<option value=""></option>';
+      $.each(DataResp.SchemeID,
+              function(index, value) {
+                Options += '<option value="' + value.SchemeID + '">'
+                        + value.SchemeID + ' - ' + value.SchemeName
+                        + '</option>';
+              });
+      $('#SchemeID').html(Options)
+              .trigger("chosen:updated");
+      $('#SchemeID').data('SchemeID', DataResp.SchemeID);
+      //option for projects...
+      Options = '<option value=""></option>';
+      $.each(DataResp.ProjectID,
+              function(index, value) {
+                Options += '<option value="' + value.ProjectID + '">'
+                        + value.ProjectID + ' - ' + value.ProjectName
+                        + '</option>';
+              });
+      $('#ProjectID').html(Options)
+              .trigger("chosen:updated");
+      $('#ProjectID').data('ProjectID', DataResp.ProjectID);
       delete DataResp;
-      $("#Msg").hide();
+      $("#Msg").html('');
     }
     catch (e) {
       $('#Msg').html('Server Error:' + e);
@@ -79,104 +133,6 @@ $(function() {
   }).fail(function(msg) {
     $('#Msg').html(msg);
   });
-
-  $("#DeptID")
-          .chosen({width: "250px",
-            no_results_text: "Oops, nothing found!"})
-          .change(function() {
-            var Options = '<option value=""></option>';
-          });
-  $("#SectorID").chosen({width: "220px",
-    no_results_text: "Oops, nothing found!"})
-          .change(function() {
-            var Options = '<option value=""></option>';
-          });
-
-  $("#SchemeID").chosen({width: "220px",
-    no_results_text: "Oops, nothing found!"})
-          .change(function() {
-            var Options = '<option value=""></option>';
-          });
-  $("#SchemeID").chosen({width: "250px",
-    no_results_text: "Oops, nothing found!"})
-          .change(function() {
-            var Options = '<option value=""></option>';
-          });
-  $("#ProjectID").chosen({width: "250px",
-    no_results_text: "Oops, nothing found!"})
-          .change(function() {
-            var Options = '<option value=""></option>';
-          });
-
-  $.ajax({
-    type: 'POST',
-    url: 'AjaxMpr.php',
-    dataType: 'html',
-    xhrFields: {
-      withCredentials: true
-    }
-  })
-          .done(function(data) {
-            try {
-              var DataResp = $.parseJSON(data);
-              delete data;
-              var Options = '<option value=""></option>';
-              $.each(DataResp.DeptID,
-                      function(index, value) {
-                        //option for Departments...
-                        Options += '<option value="' + value.DeptID + '">'
-                                + value.DeptID + ' - ' + value.DeptName
-                                + '</option>';
-                      });
-              $('#DeptID').html(Options)
-                      .trigger("chosen:updated");
-              $('#DeptID').data('DeptID', DataResp.DeptID);
-              //option for Sectors..
-              Options = '<option value=""></option>';
-              $.each(DataResp.SectorID,
-                      function(index, value) {
-                        Options += '<option value="' + value.SectorID + '">'
-                                + value.SectorID + ' - ' + value.SectorName
-                                + '</option>';
-                      });
-              $('#SectorID').html(Options)
-                      .trigger("chosen:updated");
-              $('#SectorID').data('SectorID', DataResp.SectorID);
-              //option for Schemes...
-              Options = '<option value=""></option>';
-              $.each(DataResp.SchemeID,
-                      function(index, value) {
-                        Options += '<option value="' + value.SchemeID + '">'
-                                + value.SchemeID + ' - ' + value.SchemeName
-                                + '</option>';
-                      });
-              $('#SchemeID').html(Options)
-                      .trigger("chosen:updated");
-              $('#SchemeID').data('SchemeID', DataResp.SchemeID);
-              //option for projects...
-              Options = '<option value=""></option>';
-              $.each(DataResp.ProjectID,
-                      function(index, value) {
-                        Options += '<option value="' + value.ProjectID + '">'
-                                + value.ProjectID + ' - ' + value.ProjectName
-                                + '</option>';
-                      });
-              $('#ProjectID').html(Options)
-                      .trigger("chosen:updated");
-              $('#ProjectID').data('ProjectID', DataResp.ProjectID);
-              delete DataResp;
-              $("#Msg").html('');
-            }
-            catch (e) {
-              $('#Msg').html('Server Error:' + e);
-              $('#Error').html(data);
-            }
-          })
-          .fail(function(msg) {
-            $('#Msg').html(msg);
-          });
-
-
 
   $("#PhysicalSlider").slider({
     range: "min",
