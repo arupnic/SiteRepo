@@ -17,7 +17,7 @@ function SQLDefs($ObjectName) {
   switch ($ObjectName) {
     case 'MPR_Departments':
       $SqlDB = 'CREATE TABLE IF NOT EXISTS `' . MySQL_Pre . $ObjectName . '` ('
-          . '`DeptID` bigint(20) NOT NULL AUTO_INCREMENT,'
+          . '`DeptID` int(10) NOT NULL AUTO_INCREMENT,'
           . '`DeptName` VARCHAR(100) DEFAULT NULL,'
           . '`UserMapID` INT(10) DEFAULT 1,'
           . 'UNIQUE KEY `DeptName` (`DeptName`),'
@@ -26,7 +26,7 @@ function SQLDefs($ObjectName) {
       break;
     case 'MPR_Sectors':
       $SqlDB = 'CREATE TABLE IF NOT EXISTS `' . MySQL_Pre . $ObjectName . '` ('
-          . '`SectorID` bigint(20) NOT NULL AUTO_INCREMENT,'
+          . '`SectorID` int(10) NOT NULL AUTO_INCREMENT,'
           . '`SectorName` VARCHAR(100) DEFAULT NULL,'
           . '`UserMapID` INT(10) DEFAULT 1,'
           . 'UNIQUE KEY `SectorName` (`SectorName`),'
@@ -35,18 +35,26 @@ function SQLDefs($ObjectName) {
       break;
     case 'MPR_Schemes':
       $SqlDB = 'CREATE TABLE IF NOT EXISTS `' . MySQL_Pre . $ObjectName . '` ('
-          . '`SchemeID` bigint(20) NOT NULL AUTO_INCREMENT,'
+          . '`SchemeID` int(10) NOT NULL AUTO_INCREMENT,'
           . '`SchemeName` VARCHAR(100) DEFAULT NULL,'
           . '`DeptID` INT(10),'
           . '`SectorID` INT(10),'
           . '`UserMapID` INT(10) DEFAULT 1,'
           . 'UNIQUE KEY `SchemeName` (`SchemeName`,`DeptID`,`SectorID`),'
-          . ' PRIMARY KEY (`SchemeID`)'
+          . ' PRIMARY KEY (`SchemeID`),'
+          . ' KEY `DeptID` (`DeptID`),'
+          . ' KEY `SectorID` (`SectorID`),'
+          . ' CONSTRAINT `FK_SectorID` FOREIGN KEY (`SectorID`)'
+          . ' REFERENCES `' . MySQL_Pre . 'MPR_Sectors` (`SectorID`)'
+          . ' ON UPDATE CASCADE,'
+          . ' CONSTRAINT `FK_DeptID` FOREIGN KEY (`DeptID`) '
+          . ' REFERENCES `' . MySQL_Pre . 'MPR_Departments` (`DeptID`)'
+          . ' ON UPDATE CASCADE'
           . ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
       break;
     case 'MPR_Projects':
       $SqlDB = 'CREATE TABLE IF NOT EXISTS `' . MySQL_Pre . $ObjectName . '` ('
-          . '`ProjectID` bigint(20) NOT NULL AUTO_INCREMENT,'
+          . '`ProjectID` int(10) NOT NULL AUTO_INCREMENT,'
           . '`SchemeID` INT(10),'
           . '`UserMapID` INT(10) DEFAULT 1,'
           . '`ProjectName` VARCHAR(100) DEFAULT NULL,'
@@ -56,13 +64,17 @@ function SQLDefs($ObjectName) {
           . '`AlotmentDate` date,'
           . '`TenderDate` date,'
           . '`WorkOrderDate` date,'
-          . 'UNIQUE KEY `ProjectName` (`ProjectName`,`SchemeID`),'
-          . ' PRIMARY KEY (`ProjectID`)'
+          . ' PRIMARY KEY (`ProjectID`),'
+          . ' UNIQUE KEY `ProjectName` (`ProjectName`,`SchemeID`),'
+          . ' KEY `SchemeID` (`SchemeID`),'
+          . ' CONSTRAINT `FK_SchemeID` FOREIGN KEY (`SchemeID`)'
+          . ' REFERENCES `' . MySQL_Pre . 'MPR_Schemes` (`SchemeID`) '
+          . ' ON UPDATE CASCADE'
           . ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
       break;
     case 'MPR_Progress':
       $SqlDB = 'CREATE TABLE IF NOT EXISTS `' . MySQL_Pre . $ObjectName . '` ('
-          . '`ReportID` bigint(20) NOT NULL AUTO_INCREMENT,'
+          . '`ReportID` int(10) NOT NULL AUTO_INCREMENT,'
           . '`UserMapID` INT(10) DEFAULT 1,'
           . '`ReportDate` date,'
           . '`ProjectID` INT(10),'
@@ -74,7 +86,7 @@ function SQLDefs($ObjectName) {
       break;
     case 'MPR_UserMaps':
       $SqlDB = 'CREATE TABLE IF NOT EXISTS `' . MySQL_Pre . $ObjectName . '` ('
-          . '`DeptID` bigint(20) NOT NULL AUTO_INCREMENT,'
+          . '`DeptID` int(10) NOT NULL AUTO_INCREMENT,'
           . '`DeptName` VARCHAR(100) DEFAULT NULL,'
           . ' PRIMARY KEY (`DeptID`)'
           . ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
