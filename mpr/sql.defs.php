@@ -20,6 +20,7 @@ function SQLDefs($ObjectName) {
           . '`DeptID` bigint(20) NOT NULL AUTO_INCREMENT,'
           . '`DeptName` VARCHAR(100) DEFAULT NULL,'
           . '`UserMapID` INT(10) DEFAULT 1,'
+          . 'UNIQUE KEY `DeptName` (`DeptName`),'
           . ' PRIMARY KEY (`DeptID`)'
           . ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
       break;
@@ -28,6 +29,7 @@ function SQLDefs($ObjectName) {
           . '`SectorID` bigint(20) NOT NULL AUTO_INCREMENT,'
           . '`SectorName` VARCHAR(100) DEFAULT NULL,'
           . '`UserMapID` INT(10) DEFAULT 1,'
+          . 'UNIQUE KEY `SectorName` (`SectorName`),'
           . ' PRIMARY KEY (`SectorID`)'
           . ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
       break;
@@ -38,6 +40,7 @@ function SQLDefs($ObjectName) {
           . '`DeptID` INT(10),'
           . '`SectorID` INT(10),'
           . '`UserMapID` INT(10) DEFAULT 1,'
+          . 'UNIQUE KEY `SchemeName` (`SchemeName`,`DeptID`,`SectorID`),'
           . ' PRIMARY KEY (`SchemeID`)'
           . ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
       break;
@@ -53,6 +56,7 @@ function SQLDefs($ObjectName) {
           . '`AlotmentDate` date,'
           . '`TenderDate` date,'
           . '`WorkOrderDate` date,'
+          . 'UNIQUE KEY `ProjectName` (`ProjectName`,`SchemeID`),'
           . ' PRIMARY KEY (`ProjectID`)'
           . ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
       break;
