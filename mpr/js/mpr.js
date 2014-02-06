@@ -50,11 +50,13 @@ $(function() {
           .change(function() {
             var Options = '<option value=""></option>';
           });
+
   $("#SchemeID").chosen({width: "200px",
     no_results_text: "Oops, nothing found!"})
           .change(function() {
             var Options = '<option value=""></option>';
           });
+
   $("#ProjectID").chosen({width: "200px",
     no_results_text: "Oops, nothing found!"})
           .change(function() {
@@ -179,17 +181,6 @@ $(function() {
       try {
         var DataResp = $.parseJSON(data);
         delete data;
-//        if (DataResp.Done === 0) {
-//          var OfficeSL = $("#OfficeSL").val();
-//          $('#frmPP2').trigger("reset");
-//          $("#OfficeSL").val(OfficeSL);
-//          $("#OfficeSL").trigger("chosen:updated");
-//          $('#BankName').trigger("chosen:updated");
-//          $("#BranchName").trigger("chosen:updated");
-//          $('#Qualification').trigger("chosen:updated");
-//          $('#PayScale').trigger("chosen:updated");
-//          alert(DataResp.Msg);
-//        }
         $("#FormToken").val(DataResp.FormToken);
         $("#Msg").html(DataResp.Msg);
         delete DataResp;

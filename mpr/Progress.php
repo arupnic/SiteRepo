@@ -9,7 +9,7 @@ WebLib::Html5Header('Progress');
 WebLib::IncludeCSS();
 WebLib::JQueryInclude();
 WebLib::IncludeCSS('css/chosen.css');
-WebLib::IncludeJS('mpr/js/forms.js');
+//WebLib::IncludeJS('mpr/js/forms.js');
 WebLib::IncludeJS('mpr/js/mpr.js');
 WebLib::IncludeCSS('mpr/css/forms.css');
 WebLib::IncludeJS('js/chosen.jquery.min.js');
@@ -27,7 +27,7 @@ WebLib::IncludeJS('js/chosen.jquery.min.js');
   ?>
   <div class="content">
     <div class="formWrapper">
-      <form method="post"
+      <form method="post" id="frmDepartment"
             action="<?php
             echo WebLib::GetVal($_SERVER, 'PHP_SELF');
             ?>">
@@ -75,11 +75,12 @@ WebLib::IncludeJS('js/chosen.jquery.min.js');
         </div>
         <div style="clear: both;"></div>
         <div class="formControl">
+          <input type="submit" name="CmdSubmit" value="Save Progress"  id="CmdSaveUpdate">
+          <input type="hidden" id="TxtAction" name="CmdSubmit" value="" />
           <input type="hidden" name="FormToken"
                  value="<?php echo WebLib::GetVal($_SESSION, 'FormToken') ?>" />
           <input type="hidden" id="AjaxToken"
                  value="<?php echo WebLib::GetVal($_SESSION, 'Token'); ?>" />
-          <input type="submit" name="CmdSubmit" value="Save Progress">
         </div>
       </form>
     </div>

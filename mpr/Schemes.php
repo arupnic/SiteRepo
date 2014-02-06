@@ -34,24 +34,40 @@ WebLib::IncludeJS('js/chosen.jquery.min.js');
             WebLib::ShowMsg();
             ?>
         <fieldset>
-          <legend> Sector</legend>
+          <legend>Create New Scheme</legend>
 
           <div class="FieldGroup">
-            <label for="SectorName"><span id="myfont">Name of Sector</span>
-              <input type="text" id="SectorName" name="SectorName"
-                     placeholder="Name of Sector"/>
+            <label for="DeptID"><span id="myfont">Select Name of Department</span>
+              <select id="DeptID" name="DeptID"
+                      data-placeholder="Select Department"
+                      >
+              </select></label>
+          </div>
+          <div class="FieldGroup">
+            <label for="SectorID"><span id="myfont">Select Name of Sectors</span>
+              <select id="SectorID" name="SectorID"
+                      data-placeholder="Select Sector"
+                      >
+              </select></label>
+          </div>
+          <div class="FieldGroup">
+            <label for="SchemeName"><span id="myfont">Name of Schemes</span>
+              <input type="text" name="SchemeName" id="SchemeName"
+                     placeholder="Name of Schemes"/>
             </label>
           </div>
           <div style="clear: both;"></div>
           <hr/>
           <div class="formControl">
-            <input type="submit" name="CmdSubmit" value="Create Sector" id="CmdSaveUpdate">
+            <input type="submit" name="CmdSubmit" value="Create Scheme" id="CmdSaveUpdate">
             <input type="hidden" id="TxtAction" name="CmdSubmit" value="" />
-            <input type="hidden" name="FormToken"
-                   value="<?php
-                   echo WebLib::GetVal($_SESSION, 'FormToken')
-                   ?>" />
+            <input type="reset" name="CmdReset" value="Reset">
           </div>
+          <input type="hidden" name="FormToken"
+                 value="<?php echo WebLib::GetVal($_SESSION, 'FormToken') ?>" />
+          <input type="hidden" id="AjaxToken"
+                 value="<?php echo WebLib::GetVal($_SESSION, 'Token'); ?>" />
+        </fieldset>
 
       </form>
     </div>

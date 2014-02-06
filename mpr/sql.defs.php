@@ -1,14 +1,13 @@
 <?php
 
 function CreateSchemas() {
-  $ObjDB = new MySQLiDB();
-  $ObjDB->do_ins_query(SQLDefs('MPR_Departments'));
-  $ObjDB->do_ins_query(SQLDefs('MPR_Sectors'));
-  $ObjDB->do_ins_query(SQLDefs('MPR_Schemes'));
-  $ObjDB->do_ins_query(SQLDefs('MPR_Projects'));
-  $ObjDB->do_ins_query(SQLDefs('MPR_Progress'));
-  $ObjDB->do_ins_query(SQLDefs('MenuData'));
-  $ObjDB->do_close();
+  $ObjDB = new MySQLiDBHelper();
+  $ObjDB->ddlQuery(SQLDefs('MPR_Departments'));
+  $ObjDB->ddlQuery(SQLDefs('MPR_Sectors'));
+  $ObjDB->ddlQuery(SQLDefs('MPR_Schemes'));
+  $ObjDB->ddlQuery(SQLDefs('MPR_Projects'));
+  $ObjDB->ddlQuery(SQLDefs('MPR_Progress'));
+  $ObjDB->ddlQuery(SQLDefs('MenuData'));
   unset($ObjDB);
 }
 

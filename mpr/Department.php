@@ -74,13 +74,14 @@ WebLib::IncludeJS('js/chosen.jquery.min.js');
         <div class="FieldGroup">
           <label for="DeptAddress"><span class="myfont">Address Of Department</span>
             <textarea name="DeptAddress" id="DeptAddress" rows="5" cols="20"
-                      placeholder="Describe yourself here..." required></textarea>
+                      placeholder="Enter Department Address here..." required></textarea>
           </label>
         </div>
         <div style="clear: both;"></div>
         <hr/>
         <div class="formControl">
           <input type="submit" name="CmdSubmit" value="Create Department" id="CmdSaveUpdate">
+          <input type="hidden" id="TxtAction" name="CmdSubmit" value="" />
           <input type="hidden" name="FormToken"
                  value="<?php
                  echo WebLib::GetVal($_SESSION, 'FormToken')

@@ -80,7 +80,7 @@ if (WebLib::GetVal($_POST, 'FormToken') !== NULL) {
         }
         break;
 
-      case 'Create Progress':
+      case 'Save Progress':
         $DataMPR['ProjectID']         = WebLib::GetVal($_POST, 'ProjectID');
         $DataMPR['ReportDate']        = WebLib::ToDBDate(WebLib::GetVal($_POST,
                                                                         'ReportDate'));
@@ -93,6 +93,9 @@ if (WebLib::GetVal($_POST, 'FormToken') !== NULL) {
           $DataMPR['UserMapID'] = $_SESSION['UserMapID'];
           $Query                = MySQL_Pre . 'MPR_Progress';
           $_SESSION['Msg']      = 'Progress Created Successfully!';
+        } else {
+          $Query           = '';
+          $_SESSION['Msg'] = 'Report must be at least 3 characters or more.';
         }
         break;
       case 'GetREPORTData':
