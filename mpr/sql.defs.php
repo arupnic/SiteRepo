@@ -19,8 +19,14 @@ function SQLDefs($ObjectName) {
       $SqlDB = 'CREATE TABLE IF NOT EXISTS `' . MySQL_Pre . $ObjectName . '` ('
           . '`DeptID` int(10) NOT NULL AUTO_INCREMENT,'
           . '`DeptName` VARCHAR(100) DEFAULT NULL,'
+          . '`HODName` VARCHAR(100) DEFAULT NULL,'
+          . '`HODMobile` VARCHAR(100) DEFAULT NULL,'
+          . '`HODEmail` VARCHAR(100) DEFAULT NULL,'
+          . '`DeptNumber` VARCHAR(100) DEFAULT NULL,'
+          . '`Strength` VARCHAR(100) DEFAULT NULL,'
+          . '`DeptAddress` VARCHAR(100) DEFAULT NULL,'
           . '`UserMapID` INT(10) DEFAULT 1,'
-          . 'UNIQUE KEY `DeptName` (`DeptName`),'
+          . 'UNIQUE KEY `DeptName` (`DeptName`,`DeptNumber`),'
           . ' PRIMARY KEY (`DeptID`)'
           . ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
       break;

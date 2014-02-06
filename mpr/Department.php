@@ -23,147 +23,70 @@ WebLib::IncludeJS('js/chosen.jquery.min.js');
   WebLib::ShowMenuBar('MPR');
   ?>
   <div class="content">
+    <span class="Message" id="Msg" style="float: right;">
+      <b>Loading please wait...</b>
+    </span>
     <div class="formWrapper">
       <form method="post" action="<?php
       echo WebLib::GetVal($_SERVER, 'PHP_SELF');
-      ?>"><?php
-              include __DIR__ . '/DataMPR.php';
-              WebLib::ShowMsg();
-              ?>
-        <fieldset>
-          <legend>Create New Department & Sector</legend>
+      ?>" id="frmDepartment" ><?php
+            include __DIR__ . '/DataMPR.php';
+            WebLib::ShowMsg();
+            ?>
+        <h3>Create New Department</h3>
+        <div class="FieldGroup">
+          <label for="DeptName"><span class="myfont">Name of Department</span>
+            <input type="text" name ="DeptName" id="DeptName"
+                   placeholder="Name of Department" required/>
+          </label>
+        </div>
+        <div class="FieldGroup">
+          <label for="HODName"><span class="myfont">Name of The HOD</span>
+            <input type="text" id="HODName" name="HODName" value=""
+                   placeholder="Name of The HOD" required/>
+          </label>
+        </div>
+        <div class="FieldGroup">
+          <label for="HODMobile"><span class="myfont">Mobile Number Of HOD</span>
+            <input type=text name="HODMobile" id="HODMobile" value=""
+                   placeholder="Mobile Number" required/>
+          </label>
+        </div>
+        <div class="FieldGroup">
+          <label for="HODEmail"><span class="myfont">Email Of HOD</span>
+            <input type=email name="HODEmail" id="HODEmail" value=""
+                   placeholder="HOD Email" required/>
+          </label>
+        </div>
 
-          <div class="FieldGroup">
-            <label for="DeptName"><span id="myfont">Name of Department</span>
-              <input type="text" name ="DeptName" id="DeptName"
-                     placeholder="Name of Department"/>
-            </label>
-            <div style="clear: both;"></div>
-            <hr/>
-            <div class="formControl">
-              <input type="submit" name="CmdSubmit" value="Create Department">
-              <input type="hidden" name="FormToken"
-                     value="<?php echo WebLib::GetVal($_SESSION, 'FormToken')
-              ?>
-                     " />
-            </div>
-          </div>
-          <div class="FieldGroup">
-            <label for="SectorName"><span id="myfont">Name of Sector</span>
-              <input type="text" id="SectorName" name="SectorName"
-                     placeholder="Name of Sector"/>
-            </label>
-            <div style="clear: both;"></div>
-            <hr/>
-            <div class="formControl">
-              <input type="submit" name="CmdSubmit" value="Create Sector">
-              <input type="hidden" name="FormToken"
-                     value="<?php
-                     echo WebLib::GetVal($_SESSION, 'FormToken')
-                     ?>" />
-            </div>
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend>Create New Scheme</legend>
-
-          <div class="FieldGroup">
-            <label for="DeptID"><span id="myfont">Select Name of Department</span>
-              <select id="DeptID" name="DeptID"
-                      data-placeholder="Select Department"
-                      >
-              </select></label>
-          </div>
-          <div class="FieldGroup">
-            <label for="SectorID"><span id="myfont">Select Name of Sectors</span>
-              <select id="SectorID" name="SectorID"
-                      data-placeholder="Select Sector"
-                      >
-              </select></label>
-          </div>
-          <div class="FieldGroup">
-            <label for="SchemeName"><span id="myfont">Name of Schemes</span>
-              <input type="text" name="SchemeName" id="SchemeName"
-                     placeholder="Name of Schemes"/>
-            </label>
-          </div>
-          <div style="clear: both;"></div>
-          <hr/>
-          <div class="formControl">
-            <input type="submit" name="CmdSubmit" value="Create Scheme">
-            <input type="reset" name="CmdReset" value="Reset">
-          </div>
-
+        <div class="FieldGroup">
+          <label for="DeptNumber"><span class="myfont">Land Line Number Of Department</span>
+            <input type=text name="DeptNumber" id="DeptNumber" value=""
+                   placeholder="Landline Number" required/>
+          </label>
+        </div>
+        <div class="FieldGroup">
+          <label for="Strength"><span class="myfont">Staff Strength Of Department</span>
+            <input type=text name="Strength" id="Strength" value=""
+                   placeholder="Staff Strength" required/>
+          </label>
+        </div>
+        <div class="FieldGroup">
+          <label for="DeptAddress"><span class="myfont">Address Of Department</span>
+            <textarea name="DeptAddress" id="DeptAddress" rows="5" cols="20"
+                      placeholder="Describe yourself here..." required></textarea>
+          </label>
+        </div>
+        <div style="clear: both;"></div>
+        <hr/>
+        <div class="formControl">
+          <input type="submit" name="CmdSubmit" value="Create Department" id="CmdSaveUpdate">
           <input type="hidden" name="FormToken"
-                 value="<?php echo WebLib::GetVal($_SESSION, 'FormToken') ?>" />
-        </fieldset>
-        <fieldset>
-          <legend>Create New Project</legend>
-          <?php
-          $Data  = new MySQLiDB();
-          $Data1 = new MySQLiDBHelper();
-          ?>
-          <div class="FieldGroup">
-            <label for="SchemeName"><span id="myfont">Select Scheme</span>
-              <select id="SchemeID" name="SchemeID"
-                      data-placeholder="Select Scheme">
-              </select>
-            </label>
-          </div>
-          <div class="FieldGroup">
-            <label for="ProjectName"><span id="myfont">Name of Project</span>
-              <input type="text" name="ProjectName" id="ProjectName"
-                     placeholder="Name of Projects"/>
-            </label>
-          </div>
-          <div class="FieldGroup">
-            <label for="ProjectCost"><span id="myfont">Project Cost</span>
-              <input type="text" name="ProjectCost" id="ProjectCost"
-                     placeholder="Project Cost"/>
-            </label>
-          </div>
-          <div class="FieldGroup">
-            <label for="AlotmentAmount"><span id="myfont">
-                Project Allotment Amount</span>
-              <input type="text" name="AlotmentAmount" id="AlotmentAmount"
-                     placeholder="Project Allotment Amount"/>
-            </label>
-          </div>
-          <div class="FieldGroup">
-            <label for="StartDate"><span id="myfont">Project Start Date</span>
-              <input type="text" id="StartDate" name="StartDate"
-                     placeholder="YYYY-MM-DD" size="12" />
-            </label>
-          </div>
-          <div class="FieldGroup">
-            <label for="AlotmentDate"><span id="myfont">Project Allotment Date
-              </span>
-              <input type="text" id="AlotmentDate" name="AlotmentDate"
-                     placeholder="YYYY-MM-DD" size="12"  />
-            </label>
-          </div>
-          <div class="FieldGroup">
-            <label for="TenderDate"><span id="myfont">Project Tender Date</span>
-              <input type="text" id="TenderDate" name="TenderDate"
-                     placeholder="YYYY-MM-DD" size="12" />
-            </label>
-          </div>
-          <div class="FieldGroup">
-            <label for="WorkOrderDate"><span id="myfont">Project Work Order Date</span>
-              <input type="text" id="WorkOrderDate" name="WorkOrderDate"
-                     placeholder="YYYY-MM-DD"  size="12" />
-            </label>
-          </div>
-          <div style="clear: both;"></div>
-          <hr/>
-
-          <div class="formControl">
-            <input type="submit" name="CmdSubmit" value="Create Project">
-            <input type="reset" name="CmdReset" value="Reset">
-            <input type="hidden" name="FormToken"
-                   value="<?php echo WebLib::GetVal($_SESSION, 'FormToken') ?>" />
-          </div>
-        </fieldset>
+                 value="<?php
+                 echo WebLib::GetVal($_SESSION, 'FormToken')
+                 ?>" />
+<!--          <pre id="Error">
+</pre>--></div>
       </form>
     </div>
   </div>
@@ -175,4 +98,3 @@ WebLib::IncludeJS('js/chosen.jquery.min.js');
   </div>
 </body>
 </html>
-

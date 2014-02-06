@@ -31,6 +31,9 @@ root {
   transition: background .25s linear,box-shadow .25s linear;
 }
 .formWrapper input[type=text],
+.formWrapper input[type=email],
+.formWrapper input[type=number],
+.formWrapper textarea,
 .formWrapper input[type=password]{
   font-size: 15px;
   color: #858585;
@@ -102,7 +105,7 @@ root {
   padding: 0px;
   float: left;
 }
-#myfont {
+.myfont {
   color: #660000;
   font-family: Calibri, Georgia, "Book Antiqua", Verdana;
   font-size:15px;

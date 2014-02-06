@@ -75,12 +75,13 @@ $(function() {
   }).done(function(data) {
     try {
       var DataResp = $.parseJSON(data);
+      $('#Error').html(data);
       delete data;
       $('#AjaxToken').val(DataResp.AjaxToken);
       $('#Msg').html(DataResp.Msg);
       $('#ED').html(DataResp.RT);
       var Options = '<option value=""></option>';
-      $.each(DataResp.DeptID,
+      $.each(DataResp.DeptID.Data,
               function(index, value) {
                 //option for Departments...
                 Options += '<option value="' + value.DeptID + '">'
@@ -92,7 +93,7 @@ $(function() {
       $('#DeptID').data('DeptID', DataResp.DeptID);
       //option for Sectors..
       Options = '<option value=""></option>';
-      $.each(DataResp.SectorID,
+      $.each(DataResp.SectorID.Data,
               function(index, value) {
                 Options += '<option value="' + value.SectorID + '">'
                         + value.SectorID + ' - ' + value.SectorName
@@ -103,7 +104,7 @@ $(function() {
       $('#SectorID').data('SectorID', DataResp.SectorID);
       //option for Schemes...
       Options = '<option value=""></option>';
-      $.each(DataResp.SchemeID,
+      $.each(DataResp.SchemeID.Data,
               function(index, value) {
                 Options += '<option value="' + value.SchemeID + '">'
                         + value.SchemeID + ' - ' + value.SchemeName
@@ -114,7 +115,7 @@ $(function() {
       $('#SchemeID').data('SchemeID', DataResp.SchemeID);
       //option for projects...
       Options = '<option value=""></option>';
-      $.each(DataResp.ProjectID,
+      $.each(DataResp.ProjectID.Data,
               function(index, value) {
                 Options += '<option value="' + value.ProjectID + '">'
                         + value.ProjectID + ' - ' + value.ProjectName
@@ -154,5 +155,51 @@ $(function() {
       $("#FinancialProgress").val(ui.value);
     }
   });
+//  $('#CmdDel').on("click", function() {
+//    $("#TxtAction").val($(this).val());
+//  });
 
+  $('#CmdSaveUpdate').on("click", function() {
+    $("#TxtAction").val($(this).val());
+  });
+
+  $("form").on("submit", function(event) {
+    event.preventDefault();
+    $('#Msg').html('Saving Please Wait...');
+    $.ajax({
+      type: 'POST',
+      url: 'AjaxSaveData.php',
+      dataType: 'html',
+      xhrFields: {
+        withCredentials: true
+      },
+      data: $("#frmDepartment").serialize()
+
+    }).done(function(data) {
+      try {
+        var DataResp = $.parseJSON(data);
+        delete data;
+//        if (DataResp.Done === 0) {
+//          var OfficeSL = $("#OfficeSL").val();
+//          $('#frmPP2').trigger("reset");
+//          $("#OfficeSL").val(OfficeSL);
+//          $("#OfficeSL").trigger("chosen:updated");
+//          $('#BankName').trigger("chosen:updated");
+//          $("#BranchName").trigger("chosen:updated");
+//          $('#Qualification').trigger("chosen:updated");
+//          $('#PayScale').trigger("chosen:updated");
+//          alert(DataResp.Msg);
+//        }
+        $("#FormToken").val(DataResp.FormToken);
+        $("#Msg").html(DataResp.Msg);
+        delete DataResp;
+      }
+      catch (e) {
+        $('#Msg').html('Server Error:' + e);
+        $('#Error').html(data);
+      }
+    }).fail(function(msg) {
+      $('#Msg').html(msg);
+    });
+  });
 });

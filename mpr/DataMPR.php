@@ -13,10 +13,16 @@ if (WebLib::GetVal($_POST, 'FormToken') !== NULL) {
     // Authenticated Inputs
     switch (WebLib::GetVal($_POST, 'CmdSubmit')) {
       case 'Create Department':
-        $DataMPR['DeptName'] = WebLib::GetVal($_POST, 'DeptName', true);
+        $DataMPR['DeptName']    = WebLib::GetVal($_POST, 'DeptName');
+        $DataMPR['HODName']     = WebLib::GetVal($_POST, 'HODName');
+        $DataMPR['HODMobile']   = WebLib::GetVal($_POST, 'HODMobile');
+        $DataMPR['HODEmail']    = WebLib::GetVal($_POST, 'HODEmail');
+        $DataMPR['DeptNumber']  = WebLib::GetVal($_POST, 'DeptNumber');
+        $DataMPR['Strength']    = WebLib::GetVal($_POST, 'Strength');
+        $DataMPR['DeptAddress'] = WebLib::GetVal($_POST, 'DeptAddress');
         if (strlen($DataMPR['DeptName']) > 2) {
           $DataMPR['UserMapID'] = $_SESSION['UserMapID'];
-          $Query                = MySQL_Pre . 'MPR_Departments';
+          $Query                = MySQL_Pre . 'MPR_Sectors';
           $_SESSION['Msg']      = 'Department Created Successfully!';
         } else {
           $Query           = '';

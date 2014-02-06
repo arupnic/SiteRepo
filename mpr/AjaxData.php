@@ -77,7 +77,8 @@ if (WebLib::GetVal($_POST, 'AjaxToken') === WebLib::GetVal($_SESSION, 'Token')) 
       doQuery($DataResp['ProjectID'], $Query);
       break;
   }
-  $_SESSION['Token']     = md5($_SERVER['REMOTE_ADDR'] . session_id() . $_SESSION['ET']);
+  $_SESSION['Token'] = md5($_SERVER['REMOTE_ADDR'] . session_id() . $_SESSION['ET']);
+
   $_SESSION['LifeTime']  = time();
   $DataResp['AjaxToken'] = $_SESSION['Token'];
   $DataResp['RT']        = '<b>Response Time:</b> '
