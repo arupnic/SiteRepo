@@ -46,45 +46,45 @@ WebLib::IncludeJS('js/chosen.jquery.min.js');
           </label>
         </div>
         <div class="FieldGroup">
-          <label for="ProjectName"><span id="myfont">Name of Project</span>
+          <label for="ProjectName"><span class="myfont">Name of Project</span>
             <input type="text" name="ProjectName" id="ProjectName"
                    placeholder="Name of Projects"/>
           </label>
         </div>
         <div class="FieldGroup">
-          <label for="ProjectCost"><span id="myfont">Project Cost</span>
+          <label for="ProjectCost"><span class="myfont">Project Cost</span>
             <input type="text" name="ProjectCost" id="ProjectCost"
                    placeholder="Project Cost"/>
           </label>
         </div>
         <div class="FieldGroup">
-          <label for="AlotmentAmount"><span id="myfont">
+          <label for="AlotmentAmount"><span class="myfont">
               Project Allotment Amount</span>
             <input type="text" name="AlotmentAmount" id="AlotmentAmount"
                    placeholder="Project Allotment Amount"/>
           </label>
         </div>
         <div class="FieldGroup">
-          <label for="StartDate"><span id="myfont">Project Start Date</span>
+          <label for="StartDate"><span class="myfont">Project Start Date</span>
             <input type="text" id="StartDate" name="StartDate"
                    placeholder="YYYY-MM-DD" size="12" />
           </label>
         </div>
         <div class="FieldGroup">
-          <label for="AlotmentDate"><span id="myfont">Project Allotment Date
+          <label for="AlotmentDate"><span class="myfont">Project Allotment Date
             </span>
             <input type="text" id="AlotmentDate" name="AlotmentDate"
                    placeholder="YYYY-MM-DD" size="12"  />
           </label>
         </div>
         <div class="FieldGroup">
-          <label for="TenderDate"><span id="myfont">Project Tender Date</span>
+          <label for="TenderDate"><span class="myfont">Project Tender Date</span>
             <input type="text" id="TenderDate" name="TenderDate"
                    placeholder="YYYY-MM-DD" size="12" />
           </label>
         </div>
         <div class="FieldGroup">
-          <label for="WorkOrderDate"><span id="myfont">Project Work Order Date</span>
+          <label for="WorkOrderDate"><span class="myfont">Project Work Order Date</span>
             <input type="text" id="WorkOrderDate" name="WorkOrderDate"
                    placeholder="YYYY-MM-DD"  size="12" />
           </label>

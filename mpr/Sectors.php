@@ -31,7 +31,7 @@ WebLib::IncludeJS('js/chosen.jquery.min.js');
       echo WebLib::GetVal($_SERVER, 'PHP_SELF');
       ?>" id="frmDepartment" ><?php
             include __DIR__ . '/DataMPR.php';
-            WebLib::ShowMsg();
+            //WebLib::ShowMsg();
             ?>
         <fieldset>
           <legend> Sector</legend>

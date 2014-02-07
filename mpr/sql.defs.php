@@ -25,7 +25,6 @@ function SQLDefs($ObjectName) {
           . '`Strength` VARCHAR(100) DEFAULT NULL,'
           . '`DeptAddress` VARCHAR(100) DEFAULT NULL,'
           . '`UserMapID` INT(10) DEFAULT 1,'
-          . 'UNIQUE KEY `DeptName` (`DeptName`,`DeptNumber`),'
           . ' PRIMARY KEY (`DeptID`)'
           . ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
       break;

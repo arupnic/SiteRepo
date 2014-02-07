@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../lib.inc.php';
 
 WebLib::AuthSession();
-WebLib::Html5Header('Departments');
+WebLib::Html5Header('Schemes');
 WebLib::IncludeCSS();
 WebLib::JQueryInclude();
 //WebLib::IncludeJS('mpr/js/forms.js');
@@ -34,24 +34,24 @@ WebLib::IncludeJS('js/chosen.jquery.min.js');
             WebLib::ShowMsg();
             ?>
         <fieldset>
-          <legend>Create New Scheme</legend>
+          <h3>Create New Scheme</h3>
 
           <div class="FieldGroup">
-            <label for="DeptID"><span id="myfont">Select Name of Department</span>
+            <label for="DeptID"><span class="myfont">Select Name of Department</span>
               <select id="DeptID" name="DeptID"
                       data-placeholder="Select Department"
                       >
               </select></label>
           </div>
           <div class="FieldGroup">
-            <label for="SectorID"><span id="myfont">Select Name of Sectors</span>
+            <label for="SectorID"><span class="myfont">Select Name of Sectors</span>
               <select id="SectorID" name="SectorID"
                       data-placeholder="Select Sector"
                       >
               </select></label>
           </div>
           <div class="FieldGroup">
-            <label for="SchemeName"><span id="myfont">Name of Schemes</span>
+            <label for="SchemeName"><span class="myfont">Name of Schemes</span>
               <input type="text" name="SchemeName" id="SchemeName"
                      placeholder="Name of Schemes"/>
             </label>

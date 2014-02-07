@@ -1,5 +1,8 @@
 <?php
 
+ini_set('display_errors', '1');
+error_reporting(E_ALL);
+
 require_once ( __DIR__ . '/../lib.inc.php');
 
 $Data               = new MySQLiDBHelper();
@@ -22,7 +25,7 @@ if (WebLib::GetVal($_POST, 'FormToken') !== NULL) {
         $DataMPR['DeptAddress'] = WebLib::GetVal($_POST, 'DeptAddress');
         if (strlen($DataMPR['DeptName']) > 2) {
           $DataMPR['UserMapID'] = $_SESSION['UserMapID'];
-          $Query                = MySQL_Pre . 'MPR_Sectors';
+          $Query                = MySQL_Pre . 'MPR_Departments';
           $_SESSION['Msg']      = 'Department Created Successfully!';
         } else {
           $Query           = '';
@@ -115,7 +118,8 @@ if (WebLib::GetVal($_POST, 'FormToken') !== NULL) {
     }
   }
 }
-$_SESSION['FormToken'] = md5($_SERVER['REMOTE_ADDR'] . session_id() . microtime());
+$_SESSION['OldFormToken'] = $_SESSION['FormToken'];
+$_SESSION['FormToken']    = md5($_SERVER['REMOTE_ADDR'] . session_id() . microtime());
 unset($DataMPR);
 unset($Data);
 

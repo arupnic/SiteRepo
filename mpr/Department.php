@@ -6,7 +6,7 @@ WebLib::Html5Header('Departments');
 WebLib::IncludeCSS();
 WebLib::JQueryInclude();
 //WebLib::IncludeJS('mpr/js/forms.js');
-WebLib::IncludeJS('mpr/js/mpr.js');
+WebLib::IncludeJS('mpr/js/Department.js');
 WebLib::IncludeCSS('mpr/css/forms.css');
 WebLib::IncludeCSS('css/chosen.css');
 WebLib::IncludeJS('js/chosen.jquery.min.js');
@@ -78,17 +78,18 @@ WebLib::IncludeJS('js/chosen.jquery.min.js');
           </label>
         </div>
         <div style="clear: both;"></div>
-        <hr/>
         <div class="formControl">
           <input type="submit" name="CmdSubmit" value="Create Department" id="CmdSaveUpdate">
           <input type="hidden" id="TxtAction" name="CmdSubmit" value="" />
-          <input type="hidden" name="FormToken"
-                 value="<?php
-                 echo WebLib::GetVal($_SESSION, 'FormToken')
-                 ?>" />
-<!--          <pre id="Error">
-</pre>--></div>
+          <input type="reset" name="CmdReset" value="Reset">
+        </div>
+        <input type="hidden" name="FormToken" id="FormToken"
+               value="<?php echo WebLib::GetVal($_SESSION, 'FormToken') ?>" />
+        <input type="hidden" id="AjaxToken"
+               value="<?php echo WebLib::GetVal($_SESSION, 'Token'); ?>" />
       </form>
+      <pre id="Error">
+      </pre>
     </div>
   </div>
   <div class="pageinfo">

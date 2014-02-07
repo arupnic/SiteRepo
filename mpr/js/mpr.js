@@ -39,12 +39,11 @@ $(function() {
     buttonImageOnly: true
   });
 
-  $("#DeptID")
-          .chosen({width: "200px",
-            no_results_text: "Oops, nothing found!"})
-          .change(function() {
-            var Options = '<option value=""></option>';
-          });
+  $("#DeptID").chosen({width: "200px",
+    no_results_text: "Oops, nothing found!"
+  }).change(function() {
+    var Options = '<option value=""></option>';
+  });
   $("#SectorID").chosen({width: "200px",
     no_results_text: "Oops, nothing found!"})
           .change(function() {
@@ -79,7 +78,7 @@ $(function() {
       var DataResp = $.parseJSON(data);
       $('#Error').html(data);
       delete data;
-      $('#AjaxToken').val(DataResp.AjaxToken);
+      // $('#AjaxToken').val(DataResp.AjaxToken);
       $('#Msg').html(DataResp.Msg);
       $('#ED').html(DataResp.RT);
       var Options = '<option value=""></option>';
@@ -176,12 +175,12 @@ $(function() {
         withCredentials: true
       },
       data: $("#frmDepartment").serialize()
-
     }).done(function(data) {
       try {
         var DataResp = $.parseJSON(data);
         delete data;
         $("#FormToken").val(DataResp.FormToken);
+        $("#Ajax").val(DataResp.FormToken);
         $("#Msg").html(DataResp.Msg);
         delete DataResp;
       }

@@ -8,11 +8,12 @@ WebLib::AuthSession();
 WebLib::Html5Header('Progress');
 WebLib::IncludeCSS();
 WebLib::JQueryInclude();
-WebLib::IncludeCSS('css/chosen.css');
+
 //WebLib::IncludeJS('mpr/js/forms.js');
 WebLib::IncludeJS('mpr/js/mpr.js');
 WebLib::IncludeCSS('mpr/css/forms.css');
 WebLib::IncludeJS('js/chosen.jquery.min.js');
+WebLib::IncludeCSS('css/chosen.css');
 ?>
 </head>
 <body>
@@ -41,7 +42,7 @@ WebLib::IncludeJS('js/chosen.jquery.min.js');
         <div class="FieldGroup">
           <div class="FieldGroup">
             <label for="ProjectName">
-              <strong>Project Name</strong>
+              <span class="myfont">Project Name</span>
               <select name="ProjectID" id="ProjectID"
                       data-placeholder="Select Project">
               </select>
@@ -49,7 +50,7 @@ WebLib::IncludeJS('js/chosen.jquery.min.js');
           </div>
           <div class="FieldGroup">
             <label for="ReportDate">
-              <strong>Report Date</strong>
+              <span class="myfont">Report Date</span>
               <input type="text" id="ReportDate" name="ReportDate"
                      placeholder="YYYY-MM-DD" size="12" />
             </label>
@@ -68,15 +69,18 @@ WebLib::IncludeJS('js/chosen.jquery.min.js');
           <div id="FinancialSlider" class="jQuery-Slider"></div>
 
           <label for="Remarks">
-            <strong>Remarks</strong>
+            <span class>Remarks</span>
             <input type="text" name="Remarks" id="Remarks"
                    placeholder="Remarks"/>
           </label>
         </div>
         <div style="clear: both;"></div>
         <div class="formControl">
-          <input type="submit" name="CmdSubmit" value="Save Progress"  id="CmdSaveUpdate">
-          <input type="hidden" id="TxtAction" name="CmdSubmit" value="" />
+          <div class="formControl">
+            <input type="submit" name="CmdSubmit" value="Save Progress" id="CmdSaveUpdate">
+            <input type="hidden" id="TxtAction" name="CmdSubmit" value=" " />
+            <input type="reset" name="CmdReset" value="Reset">
+          </div>
           <input type="hidden" name="FormToken"
                  value="<?php echo WebLib::GetVal($_SESSION, 'FormToken') ?>" />
           <input type="hidden" id="AjaxToken"

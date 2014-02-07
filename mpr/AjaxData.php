@@ -22,7 +22,8 @@ if (!isset($_SESSION)) {
   session_start();
 }
 
-if (WebLib::GetVal($_POST, 'AjaxToken') === WebLib::GetVal($_SESSION, 'Token')) {
+if (WebLib::GetVal($_POST, 'AjaxToken') ===
+    WebLib::GetVal($_SESSION, 'Token')) {
   $_SESSION['LifeTime']  = time();
   $_SESSION['RT']        = microtime(TRUE);
   $_SESSION['CheckAuth'] = 'Valid';
@@ -53,6 +54,7 @@ if (WebLib::GetVal($_POST, 'AjaxToken') === WebLib::GetVal($_SESSION, 'Token')) 
       $DataResp['Projects'] = array();
       doQuery($DataResp['Projects'], $Query);
       break;
+
     case 'GetChosenData':
 
       $Query                 = 'Select `DeptID`,`DeptName`'
@@ -76,12 +78,33 @@ if (WebLib::GetVal($_POST, 'AjaxToken') === WebLib::GetVal($_SESSION, 'Token')) 
       $DataResp['ProjectID'] = array();
       doQuery($DataResp['ProjectID'], $Query);
       break;
-  }
-  $_SESSION['Token'] = md5($_SERVER['REMOTE_ADDR'] . session_id() . $_SESSION['ET']);
 
-  $_SESSION['LifeTime']  = time();
-  $DataResp['AjaxToken'] = $_SESSION['Token'];
-  $DataResp['RT']        = '<b>Response Time:</b> '
+    default :
+      $DataResp['Msg'] = 'Invalid API Call';
+      break;
+  }
+
+  $_SESSION['LifeTime'] = time();
+
+  $DataResp['RT'] = '<b>Response Time:</b> '
+      . round(microtime(TRUE) - WebLib::GetVal($_SESSION, 'RT'), 6) . ' Sec';
+  //PHP 5.4+ is required for JSON_PRETTY_PRINT
+  //@todo Remove PRETTY_PRINT for Production
+  if (strnatcmp(phpversion(), '5.4') >= 0) {
+    $AjaxResp = json_encode($DataResp, JSON_PRETTY_PRINT);
+  } else {
+    $AjaxResp = json_encode($DataResp); //WebLib::prettyPrint(json_encode($DataResp));
+  }
+  unset($DataResp);
+
+  header('Content-Type: application/json');
+  header('Content-Length: ' . strlen($AjaxResp));
+  echo $AjaxResp;
+  exit();
+} else {
+  $_SESSION['LifeTime'] = time();
+  $DataResp['Msg']      = 'Invalid Ajax Token';
+  $DataResp['RT']       = '<b>Response Time:</b> '
       . round(microtime(TRUE) - WebLib::GetVal($_SESSION, 'RT'), 6) . ' Sec';
   //PHP 5.4+ is required for JSON_PRETTY_PRINT
   //@todo Remove PRETTY_PRINT for Production
