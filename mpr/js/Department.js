@@ -17,7 +17,7 @@ $(function() {
       data: {
         'FormToken': $('#FormToken').val(),
         'AjaxToken': $('#AjaxToken').val(),
-        'CmdSubmit': 'Create Department',
+        'CmdSubmit': 'Create Sector',
         'DeptName': $("#DeptName").val(),
         'HODName': $("#HODName").val(),
         'HODMobile': $("#HODMobile").val(),
@@ -44,5 +44,5 @@ $(function() {
       $('#Msg').html(msg);
     });
   });
-  $('#Msg').html('Loaded Successfully');
+  //$('#Msg').html('Loaded Successfully');
 });

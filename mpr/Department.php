@@ -24,7 +24,7 @@ WebLib::IncludeJS('js/chosen.jquery.min.js');
   ?>
   <div class="content">
     <span class="Message" id="Msg" style="float: right;">
-      <b>Loading please wait...</b>
+      <b>Loaded Successfully..</b>
     </span>
     <div class="formWrapper">
       <form method="post" action="<?php
@@ -88,8 +88,8 @@ WebLib::IncludeJS('js/chosen.jquery.min.js');
         <input type="hidden" id="AjaxToken"
                value="<?php echo WebLib::GetVal($_SESSION, 'Token'); ?>" />
       </form>
-      <pre id="Error">
-      </pre>
+<!--      <pre id="Error">
+      </pre>-->
     </div>
   </div>
   <div class="pageinfo">

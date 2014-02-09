@@ -118,8 +118,8 @@ if (WebLib::GetVal($_POST, 'FormToken') !== NULL) {
     }
   }
 }
-$_SESSION['OldFormToken'] = $_SESSION['FormToken'];
-$_SESSION['FormToken']    = md5($_SERVER['REMOTE_ADDR'] . session_id() . microtime());
+//$_SESSION['OldFormToken'] = $_SESSION['FormToken'];
+$_SESSION['FormToken'] = md5($_SERVER['REMOTE_ADDR'] . session_id() . microtime());
 unset($DataMPR);
 unset($Data);
 
