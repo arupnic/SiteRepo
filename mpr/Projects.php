@@ -43,7 +43,7 @@ WebLib::IncludeCSS('mpr/css/forms.css');
           <div style="clear: both;"></div>
           <hr/>
           <div class="formControl">
-            <input type="submit" name="CmdSubmit" value="Create Sector" id="CmdSaveUpdate">
+            <input type="button" name="CmdSubmit" value="Create Sector" id="CmdSaveSector">
             <input type="hidden" id="TxtAction" name="CmdSubmit" value="" />
             <input type="reset" name="CmdReset" value="Reset">
           </div>
@@ -54,7 +54,6 @@ WebLib::IncludeCSS('mpr/css/forms.css');
         </fieldset>
         <fieldset>
           <h3>Create New Scheme</h3>
-
           <div class="FieldGroup">
             <label for="DeptID"><span class="myfont">Select Name of Department</span>
               <select id="DeptID" name="DeptID"
@@ -78,8 +77,8 @@ WebLib::IncludeCSS('mpr/css/forms.css');
           <div style="clear: both;"></div>
           <hr/>
           <div class="formControl">
-            <input type="submit" name="CmdSubmit" value="Create Scheme" id="CmdSaveUpdate">
             <input type="hidden" id="TxtAction" name="CmdSubmit" value="" />
+            <input type="button" name="CmdSubmit" value="Create Scheme" id="CmdSaveScheme"/>
             <input type="reset" name="CmdReset" value="Reset">
           </div>
           <input type="hidden" name="FormToken" id="FormToken"
@@ -94,7 +93,7 @@ WebLib::IncludeCSS('mpr/css/forms.css');
           $Data1 = new MySQLiDBHelper();
           ?>
           <div class="FieldGroup">
-            <label for="SchemeName"><span class="myfont">Select Scheme</span>
+            <label for="SchemeID"><span class="myfont">Select Scheme</span>
               <select id="SchemeID" name="SchemeID"
                       data-placeholder="Select Scheme">
               </select>
@@ -150,7 +149,7 @@ WebLib::IncludeCSS('mpr/css/forms.css');
           </pre>-->
           <div class="formControl">
             <input type="hidden" id="TxtAction" name="CmdSubmit" value="" />
-            <input type="submit" name="CmdSubmit" value="Create Project" id="CmdSaveUpdate">
+            <input type="button" name="CmdSubmit" value="Create Project" id="CmdSaveProject">
             <input type="reset" name="CmdReset" value="Reset">
             <input type="hidden" name="FormToken" id="FormToken"
                    value="<?php echo WebLib::GetVal($_SESSION, 'FormToken') ?>" />

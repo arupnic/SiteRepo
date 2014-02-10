@@ -1,9 +1,8 @@
 $(function() {
-  $('input[type="submit"]').button();
+  $('input[type="button"]').button();
   $('input[type="reset"]').button();
-  $('#CmdSaveUpdate').on("click", function() {
-    $("#TxtAction").val($(this).val());
-  });
+// +
+
   $('#StartDate').datepicker({
     dateFormat: 'dd-mm-yy',
     showOn: "both",
@@ -115,18 +114,10 @@ $(function() {
   }).fail(function(msg) {
     $('#Msg').html(msg);
   });
-  //calling ajax for saving data.............
-  $("form").on("submit", function(event) {
-    event.preventDefault();
-    $('#Msg').html('Saving Please Wait...');
-    /*
-     if ($('#TxtAction').val() == "Create Sector") {
-     //dialog show
-     }
-     else
-     {
-
-     }*/
+//calling ajax for saving data.............
+//start declaring the onclick methods.............
+//for create new sector.........
+  $('#CmdSaveSector').click(function() {
     $.ajax({
       type: 'POST',
       url: 'AjaxSaveData.php',
@@ -138,15 +129,15 @@ $(function() {
       data: {
         'FormToken': $('#FormToken').val(),
         'AjaxToken': $('#AjaxToken').val(),
-        'CmdSubmit': $("#TxtAction").val(),
-        'SectorName': $("#SectorName").val(),
+        'CmdSubmit': $("#CmdSaveSector").val(),
+        'SectorName': $("#SectorName").val()
       }
     }).done(function(data) {
       try {
         var DataResp = $.parseJSON(data);
         delete data;
         $("#FormToken").val(DataResp.FormToken);
-        $("#Ajax").val(DataResp.FormToken);
+        $("#AjaxToken").val(DataResp.AjaxToken);
         $("#Msg").html(DataResp.Msg);
         $('#frmProject').trigger("reset");
         delete DataResp;
@@ -159,5 +150,83 @@ $(function() {
       $('#Msg').html(msg);
     });
   });
-
+//for create new Scheme.........
+  $('#CmdSaveScheme').click(function() {
+    $.ajax({
+      type: 'POST',
+      url: 'AjaxSaveData.php',
+      dataType: 'html',
+      xhrFields: {
+        withCredentials: true
+      },
+      //data: $("#frmProject").serialize(),
+      data: {
+        'FormToken': $('#FormToken').val(),
+        'AjaxToken': $('#AjaxToken').val(),
+        'CmdSubmit': $("#CmdSaveScheme").val(),
+        'DeptID': $("#DeptID").val(),
+        'SectorID': $("#SectorID").val(),
+        'SchemeName': $("#SchemeName").val()
+      }
+    }).done(function(data) {
+      try {
+        var DataResp = $.parseJSON(data);
+        delete data;
+        $("#FormToken").val(DataResp.FormToken);
+        $("#AjaxToken").val(DataResp.AjaxToken);
+        $("#Msg").html(DataResp.Msg);
+        $('#frmProject').trigger("reset");
+        delete DataResp;
+      }
+      catch (e) {
+        $('#Msg').html('Server Error:' + e);
+        $('#Error').html(data);
+      }
+    }).fail(function(msg) {
+      $('#Msg').html(msg);
+    });
+  });
+//for create new Project.........
+  $('#CmdSaveProject').click(function() {
+    $.ajax({
+      type: 'POST',
+      url: 'AjaxSaveData.php',
+      dataType: 'html',
+      xhrFields: {withCredentials: true
+      },
+      //data: $("#frmProject").serialize(),
+      data: {'FormToken': $('#FormToken').val(),
+        'AjaxToken': $('#AjaxToken').val(),
+        'CmdSubmit': $("#CmdSaveProject").val(),
+        'SchemeID': $("#SchemeID").val(),
+        'ProjectName': $("#ProjectName").val(),
+        'ProjectCost': $("#ProjectCost").val(),
+        'AlotmentAmount': $("#AlotmentAmount").val(),
+        'StartDate': $("#StartDate").val(),
+        'AlotmentDate': $("#AlotmentDate").val(),
+        'TenderDate': $("#TenderDate").val(),
+        'WorkOrderDate': $("#WorkOrderDate").val()
+      }
+    }).done(function(data) {
+      try {
+        var DataResp = $.parseJSON(data);
+        delete data;
+        $("#FormToken").val(DataResp.FormToken);
+        $("#AjaxToken").val(DataResp.AjaxToken);
+        $("#Msg").html(DataResp.Msg);
+        $('#frmProject').trigger("reset");
+        delete DataResp;
+      }
+      catch (e) {
+        $('#Msg').html('Server Error:' + e);
+        $('#Error').html(data);
+      }
+    }).fail(function(msg) {
+      $('#Msg').html(msg);
+    });
+  });
+//  $("form").on("submit", function(event) {
+//    event.preventDefault();
+//    $('#Msg').html('Saving Please Wait...');
+//  });
 });

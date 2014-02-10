@@ -60,6 +60,7 @@ if (WebLib::GetVal($_POST, 'FormToken') !== NULL) {
         break;
 
       case 'Create Project':
+        $DataMPR['SchemeID']       = WebLib::GetVal($_POST, 'SchemeID');
         $DataMPR['ProjectName']    = WebLib::GetVal($_POST, 'ProjectName');
         $DataMPR['ProjectCost']    = WebLib::GetVal($_POST, 'ProjectCost');
         $DataMPR['AlotmentAmount'] = WebLib::GetVal($_POST, 'AlotmentAmount');
@@ -71,7 +72,7 @@ if (WebLib::GetVal($_POST, 'FormToken') !== NULL) {
                                                                      'TenderDate'));
         $DataMPR['WorkOrderDate']  = WebLib::ToDBDate(WebLib::GetVal($_POST,
                                                                      'WorkOrderDate'));
-        $DataMPR['SchemeID']       = WebLib::GetVal($_POST, 'SchemeID');
+
 
         if ((strlen($DataMPR['ProjectName']) > 2) && ($DataMPR['SchemeID'] !== null)) {
           $DataMPR['UserMapID'] = $_SESSION['UserMapID'];
