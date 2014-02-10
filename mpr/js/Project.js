@@ -139,7 +139,7 @@ $(function() {
         $("#FormToken").val(DataResp.FormToken);
         $("#AjaxToken").val(DataResp.AjaxToken);
         $("#Msg").html(DataResp.Msg);
-        $('#frmProject').trigger("reset");
+        $('#frmSector').trigger("reset");
         delete DataResp;
       }
       catch (e) {
@@ -175,7 +175,10 @@ $(function() {
         $("#FormToken").val(DataResp.FormToken);
         $("#AjaxToken").val(DataResp.AjaxToken);
         $("#Msg").html(DataResp.Msg);
-        $('#frmProject').trigger("reset");
+        $('#frmScheme').trigger("reset");
+        $("#DeptID").trigger("chosen:updated");
+        $("#SectorID").trigger("chosen:updated");
+
         delete DataResp;
       }
       catch (e) {
@@ -215,6 +218,7 @@ $(function() {
         $("#AjaxToken").val(DataResp.AjaxToken);
         $("#Msg").html(DataResp.Msg);
         $('#frmProject').trigger("reset");
+        $("#SchemeID").trigger("chosen:updated");
         delete DataResp;
       }
       catch (e) {

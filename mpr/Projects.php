@@ -28,10 +28,7 @@ WebLib::IncludeCSS('mpr/css/forms.css');
     <div class="formWrapper">
       <form method="post" action="<?php
       echo WebLib::GetVal($_SERVER, 'PHP_SELF');
-      ?>" id="frmProject" ><?php
-            include __DIR__ . '/DataMPR.php';
-            WebLib::ShowMsg();
-            ?>
+      ?>" id="frmSector" >
         <fieldset>
           <h3>Create New Sector</h3>
           <div class="FieldGroup">
@@ -52,6 +49,10 @@ WebLib::IncludeCSS('mpr/css/forms.css');
           <input type="hidden" id="AjaxToken"
                  value="<?php echo WebLib::GetVal($_SESSION, 'Token'); ?>" />
         </fieldset>
+      </form>
+      <form method="post" action="<?php
+      echo WebLib::GetVal($_SERVER, 'PHP_SELF');
+      ?>" id="frmScheme" >
         <fieldset>
           <h3>Create New Scheme</h3>
           <div class="FieldGroup">
@@ -86,6 +87,10 @@ WebLib::IncludeCSS('mpr/css/forms.css');
           <input type="hidden" id="AjaxToken"
                  value="<?php echo WebLib::GetVal($_SESSION, 'Token'); ?>" />
         </fieldset>
+      </form>
+      <form method="post" action="<?php
+      echo WebLib::GetVal($_SERVER, 'PHP_SELF');
+      ?>" id="frmProject" >
         <fieldset>
           <h3>Create New Project</h3>
           <?php
