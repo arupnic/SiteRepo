@@ -24,14 +24,13 @@ WebLib::IncludeJS('js/chosen.jquery.min.js');
   ?>
   <div class="content">
     <span class="Message" id="Msg" style="float: right;">
-      <b>Loaded Successfully..</b>
+      <b>Loaded Successfully...</b>
     </span>
     <div class="formWrapper">
       <form method="post" action="<?php
       echo WebLib::GetVal($_SERVER, 'PHP_SELF');
       ?>" id="frmDepartment" ><?php
             include __DIR__ . '/DataMPR.php';
-            WebLib::ShowMsg();
             ?>
         <h3>Create New Department</h3>
         <div class="FieldGroup">

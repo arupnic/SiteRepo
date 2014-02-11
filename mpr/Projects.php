@@ -52,7 +52,8 @@ WebLib::IncludeCSS('mpr/css/forms.css');
       </form>
       <form method="post" action="<?php
       echo WebLib::GetVal($_SERVER, 'PHP_SELF');
-      ?>" id="frmScheme" >
+      ?>"
+            id="frmScheme" >
         <fieldset>
           <h3>Create New Scheme</h3>
           <div class="FieldGroup">

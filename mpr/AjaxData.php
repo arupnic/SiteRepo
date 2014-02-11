@@ -48,18 +48,27 @@ if (WebLib::GetVal($_POST, 'AjaxToken') ===
       doQuery($DataResp['Schemes'], $Query);
 
       $Query                = 'Select `ProjectID`,`SchemeID`,`ProjectName`,`ProjectName`,`'
-          . 'ProjectCost`,`StartDate`,`AlotmentAmount`,`TenderDate`,`'
+          . 'ProjectCost`,`StartDate`,`AlotmentAmount`,`TenderDate`'
           . 'WorkOrderDate`'
           . ' FROM `' . MySQL_Pre . 'MPR_Projects`';
       $DataResp['Projects'] = array();
       doQuery($DataResp['Projects'], $Query);
       break;
 
+    case 'GetProjectData':
+      $Query                = 'Select `ProjectID`,`ProjectName`'
+          . ' FROM `' . MySQL_Pre . 'MPR_Projects`'
+          . ' Order by `ProjectID`';
+      $DataResp['Projects'] = array();
+      doQuery($DataResp['Projects'], $Query);
+      break;
+
+
     case 'GetChosenData':
 
       $Query                 = 'Select `DeptID`,`DeptName`'
           . ' FROM `' . MySQL_Pre . 'MPR_Departments`'
-          . ' Order by `DeptName`';
+          . ' Order by `DeptID`';
       $DataResp['DeptID']    = array();
       doQuery($DataResp['DeptID'], $Query);
       $Query                 = 'Select `SectorID`,`SectorName`'

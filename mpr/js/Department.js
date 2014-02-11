@@ -1,5 +1,4 @@
 $(function() {
-
   $('input[type="submit"]').button();
   $('input[type="reset"]').button();
 //calling ajax for saving data.............
@@ -17,7 +16,7 @@ $(function() {
       data: {
         'FormToken': $('#FormToken').val(),
         'AjaxToken': $('#AjaxToken').val(),
-        'CmdSubmit': 'Create Sector',
+        'CmdSubmit': 'Create Department',
         'DeptName': $("#DeptName").val(),
         'HODName': $("#HODName").val(),
         'HODMobile': $("#HODMobile").val(),
@@ -44,5 +43,5 @@ $(function() {
       $('#Msg').html(msg);
     });
   });
-  //$('#Msg').html('Loaded Successfully');
+  $('#Msg').html('Loaded Successfully');
 });

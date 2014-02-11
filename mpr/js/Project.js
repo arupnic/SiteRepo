@@ -41,6 +41,7 @@ $(function() {
     no_results_text: "Oops, nothing found!"});
   $("#ProjectID").chosen({width: "250px",
     no_results_text: "Oops, nothing found!"});
+  // Ajax call...............
   $.ajax({
     type: 'POST',
     url: 'AjaxData.php',
@@ -63,7 +64,7 @@ $(function() {
       var Options = '<option value=""></option>';
       $.each(DataResp.DeptID.Data,
               function(index, value) {
-                //option for Departments...
+                //option for Projects...
                 Options += '<option value="' + value.DeptID + '">'
                         + value.DeptID + ' - ' + value.DeptName
                         + '</option>';
@@ -101,9 +102,6 @@ $(function() {
                         + value.ProjectID + ' - ' + value.ProjectName
                         + '</option>';
               });
-      $('#ProjectID').html(Options)
-              .trigger("chosen:updated");
-      $('#ProjectID').data('ProjectID', DataResp.ProjectID);
       delete DataResp;
       $("#Msg").html('');
     }

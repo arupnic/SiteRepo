@@ -10,7 +10,7 @@ WebLib::IncludeCSS();
 WebLib::JQueryInclude();
 
 //WebLib::IncludeJS('mpr/js/forms.js');
-WebLib::IncludeJS('mpr/js/mpr.js');
+WebLib::IncludeJS('mpr/js/progress.js');
 WebLib::IncludeCSS('mpr/css/forms.css');
 WebLib::IncludeJS('js/chosen.jquery.min.js');
 WebLib::IncludeCSS('css/chosen.css');
@@ -27,11 +27,15 @@ WebLib::IncludeCSS('css/chosen.css');
   WebLib::ShowMenuBar('MPR');
   ?>
   <div class="content">
+    <span class="Message" id="Msg" style="float: right;">
+      <b>Loaded Successfully..</b>
+    </span>
     <div class="formWrapper">
-      <form method="post" id="frmDepartment"
+      <form method="post" id="frmProgress"
             action="<?php
             echo WebLib::GetVal($_SERVER, 'PHP_SELF');
-            ?>">
+            ?>"
+            id="frmProgress" >
         <h3>Process </h3>
         <?php
         include __DIR__ . '/DataMPR.php';
@@ -76,22 +80,15 @@ WebLib::IncludeCSS('css/chosen.css');
         </div>
         <div style="clear: both;"></div>
         <div class="formControl">
-          <div class="formControl">
-            <input type="submit" name="CmdSubmit" value="Save Progress" id="CmdSaveUpdate">
-            <input type="hidden" id="TxtAction" name="CmdSubmit" value=" " />
-            <input type="reset" name="CmdReset" value="Reset">
-          </div>
-          <input type="hidden" name="FormToken"
-                 value="<?php echo WebLib::GetVal($_SESSION, 'FormToken') ?>" />
-          <input type="hidden" id="AjaxToken"
-                 value="<?php echo WebLib::GetVal($_SESSION, 'Token'); ?>" />
+          <input type="submit" name="CmdSubmit" value="Save Progress" id="CmdSaveUpdate">
+          <input type="hidden" id="TxtAction" name="CmdSubmit" value=" " />
+          <input type="reset" name="CmdReset" value="Reset">
         </div>
-      </form>
+        <input type="hidden" name="FormToken" id="FormToken"
+               value="<?php echo WebLib::GetVal($_SESSION, 'FormToken') ?>" />
+        <input type="hidden" name="AjaxToken" id="AjaxToken"
+               value="<?php echo WebLib::GetVal($_SESSION, 'Token'); ?>" />
     </div>
-    <?php
-    unset($Data);
-    unset($Data1);
-    ?>
   </div>
   <div class="pageinfo">
     <?php WebLib::PageInfo(); ?>
