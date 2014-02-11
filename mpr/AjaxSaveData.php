@@ -14,6 +14,7 @@ if (WebLib::GetVal($_SESSION, 'CheckAuth') === 'Valid') {
   //$AjaxResp['OldFormToken'] = $_SESSION['OldFormToken'];
   $AjaxResp['FormToken'] = $_SESSION['FormToken'];
   $AjaxResp['Msg']       = $_SESSION['Msg'];
+  //$AjaxResp['CheckVal']  = $_SESSION['CheckVal'];
   $_SESSION['Msg']       = '';
   $AjaxResp['Done']      = count($_POST);
   $AjaxResp['Value']     = $_POST;

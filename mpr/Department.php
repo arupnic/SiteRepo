@@ -24,7 +24,7 @@ WebLib::IncludeJS('js/chosen.jquery.min.js');
   ?>
   <div class="content">
     <span class="Message" id="Msg" style="float: right;">
-      <b>Loaded Successfully...</b>
+      <b>Loading Please Wait...</b>
     </span>
     <div class="formWrapper">
       <form method="post" action="<?php

@@ -151,7 +151,7 @@ WebLib::IncludeCSS('mpr/css/forms.css');
           </div>
           <div style="clear: both;"></div>
           <hr/>
-    <!--          <pre id="Error">
+<!--          <pre id="Error">
           </pre>-->
           <div class="formControl">
             <input type="hidden" id="TxtAction" name="CmdSubmit" value="" />

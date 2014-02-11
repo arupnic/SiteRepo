@@ -32,7 +32,10 @@ $(function() {
         $("#FormToken").val(DataResp.FormToken);
         $("#Ajax").val(DataResp.FormToken);
         $("#Msg").html(DataResp.Msg);
-        $('#frmDepartment').trigger("reset");
+        if ($("#CheckVal").val != 'false')
+        {
+          $('#frmDepartment').trigger("reset");
+        }
         delete DataResp;
       }
       catch (e) {

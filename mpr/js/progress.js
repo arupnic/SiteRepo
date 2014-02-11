@@ -113,13 +113,13 @@ $(function() {
         $("#FormToken").val(DataResp.FormToken);
         $("#AjaxToken").val(DataResp.AjaxToken);
         $("#Msg").html(DataResp.Msg);
-        $('#frmProgress').trigger("reset");
-        $("#ProjectID").trigger("chosen:updated");
-        //$PhysicalSlider.slider("values", 0, initialMinimumValue);
-        $('#PhysicalSlider').slider("value", 0);
-        $('#FinancialSlider').slider("value", 0);
-        // $('PhysicalSlider').val("");
-        // $('FinancialSlider').val("");
+        if (DataResp.CheckVal != 'false')
+        {
+          $('#frmProgress').trigger("reset");
+          $("#ProjectID").trigger("chosen:updated");
+          $('#PhysicalSlider').slider("value", 0);
+          $('#FinancialSlider').slider("value", 0);
+        }
         delete DataResp;
       }
       catch (e) {

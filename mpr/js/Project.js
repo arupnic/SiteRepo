@@ -137,7 +137,11 @@ $(function() {
         $("#FormToken").val(DataResp.FormToken);
         $("#AjaxToken").val(DataResp.AjaxToken);
         $("#Msg").html(DataResp.Msg);
-        $('#frmSector').trigger("reset");
+        if (DataResp.CheckVal != 'false')
+        {
+          $('#frmSector').trigger("reset");
+        }
+
         delete DataResp;
       }
       catch (e) {
@@ -173,10 +177,13 @@ $(function() {
         $("#FormToken").val(DataResp.FormToken);
         $("#AjaxToken").val(DataResp.AjaxToken);
         $("#Msg").html(DataResp.Msg);
-        $('#frmScheme').trigger("reset");
-        $("#DeptID").trigger("chosen:updated");
-        $("#SectorID").trigger("chosen:updated");
-
+        $("#CheckVal").html(DataResp.CheckVal);
+        if (DataResp.CheckVal != 'false')
+        {
+          $('#frmScheme').trigger("reset");
+          $("#DeptID").trigger("chosen:updated");
+          $("#SectorID").trigger("chosen:updated");
+        }
         delete DataResp;
       }
       catch (e) {
@@ -215,8 +222,12 @@ $(function() {
         $("#FormToken").val(DataResp.FormToken);
         $("#AjaxToken").val(DataResp.AjaxToken);
         $("#Msg").html(DataResp.Msg);
-        $('#frmProject').trigger("reset");
-        $("#SchemeID").trigger("chosen:updated");
+        if (DataResp.CheckVal != 'false')
+        {
+          $('#frmProject').trigger("reset");
+          $("#SchemeID").trigger("chosen:updated");
+        }
+
         delete DataResp;
       }
       catch (e) {
