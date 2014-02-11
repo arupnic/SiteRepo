@@ -115,8 +115,9 @@ if (WebLib::GetVal($_POST, 'FormToken') !== NULL) {
       $Inserted = $Data->insert($Query, $DataMPR);
       if ($Inserted === false) {
         $_SESSION['CheckVal'] = 'false';
-        $_SESSION['Msg']      = 'Unable to ' . WebLib::GetVal($_POST,
-                                                              'CmdSubmit') . '! Inserted data alrady present';
+        $_SESSION['Msg']      = 'Unable to '
+            . WebLib::GetVal($_POST, 'CmdSubmit')
+            . '! Inserted data already present';
       }
     }
   }
