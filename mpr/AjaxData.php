@@ -32,28 +32,32 @@ if (WebLib::GetVal($_POST, 'AjaxToken') ===
   switch (WebLib::GetVal($_POST, 'CallAPI')) {
 
     case 'GetComboData':
-      $Query             = 'Select `DeptID`,`DeptName`'
-          . ' FROM `' . MySQL_Pre . 'MPR_Departments` ';
-      $DataResp['Depts'] = array();
-      doQuery($DataResp['Depts'], $Query);
-
-      $Query               = 'Select `SectorID`,`SectorName`'
-          . ' FROM `' . MySQL_Pre . 'MPR_Sectors` ';
-      $DataResp['Sectors'] = array();
-      doQuery($DataResp['Sectors'], $Query);
-
-      $Query               = 'Select `SchemeID`,`SchemeName`,`DeptID`,`SectorID`'
-          . ' FROM `' . MySQL_Pre . 'MPR_Schemes`';
-      $DataResp['Schemes'] = array();
-      doQuery($DataResp['Schemes'], $Query);
-
-      $Query                = 'Select `ProjectID`,`SchemeID`,`ProjectName`,`ProjectName`,`'
-          . 'ProjectCost`,`StartDate`,`AlotmentAmount`,`TenderDate`'
-          . 'WorkOrderDate`'
-          . ' FROM `' . MySQL_Pre . 'MPR_Projects`';
-      $DataResp['Projects'] = array();
-      doQuery($DataResp['Projects'], $Query);
+      $Query                = 'Select `DeptID`,`DeptName`'
+          . ' FROM `' . MySQL_Pre . 'MPR_Departments`'
+          . ' Order by `DeptID`';
+      $DataResp['DeptID']   = array();
+      doQuery($DataResp['DeptID'], $Query);
+      $Query                = 'Select `SectorID`,`SectorName`'
+          . ' FROM `' . MySQL_Pre . 'MPR_Sectors`'
+          . ' Order by `SectorName`';
+      $DataResp['SectorID'] = array();
+      doQuery($DataResp['SectorID'], $Query);
+      $Query                = 'Select `SchemeID`,`SchemeName`'
+          . ' FROM `' . MySQL_Pre . 'MPR_Schemes`'
+          . ' Order by `SchemeName`';
+      $DataResp['SchemeID'] = array();
+      doQuery($DataResp['SchemeID'], $Query);
+      $Query                = 'Select `ProjectID`,`ProjectName`,`SchemeID`'
+          . ' FROM `' . MySQL_Pre . 'MPR_Projects`'
+          . ' Order by `ProjectName`';
+      $DataResp['Reports']  = array();
+      doQuery($DataResp['Reports'], $Query);
       break;
+
+    default :
+      $DataResp['Msg'] = 'Invalid API Call';
+      break;
+
 
     case 'GetProjectData':
       $Query                = 'Select `ProjectID`,`ProjectName`'
