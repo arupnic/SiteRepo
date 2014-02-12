@@ -61,8 +61,14 @@ if (WebLib::GetVal($_POST, 'AjaxToken') ===
           . ' Order by `ProjectID`';
       $DataResp['Projects'] = array();
       doQuery($DataResp['Projects'], $Query);
-      break;
 
+      $Query                = 'Select `ProjectID`,`PhysicalProgress`,`'
+          . 'FinancialProgress`,`ReportDate`,`Remarks`'
+          . ' FROM `' . MySQL_Pre . 'MPR_Progress`'
+          . ' Order by `ProjectID`';
+      $DataResp['Progress'] = array();
+      doQuery($DataResp['Progress'], $Query);
+      break;
 
     case 'GetChosenData':
 

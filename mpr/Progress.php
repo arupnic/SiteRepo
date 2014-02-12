@@ -56,7 +56,14 @@ WebLib::IncludeCSS('css/chosen.css');
             <label for="ReportDate">
               <span class="myfont">Report Date</span>
               <input type="text" id="ReportDate" name="ReportDate"
-                     placeholder="YYYY-MM-DD" size="12" />
+                     placeholder="YYYY-MM-DD" size="12" required />
+            </label>
+          </div>
+          <div class="FieldGroup">
+            <label for="LastReportDate">
+              <span class="myfont">Last Report Date</span>
+              <input type="text" id="LastReportDate" name="LastReportDate"
+                     placeholder="LastReportDate" size="12" readonly="readonly"/>
             </label>
           </div>
           <div style="clear: both;"></div>
@@ -71,12 +78,23 @@ WebLib::IncludeCSS('css/chosen.css');
           <input type="hidden" name="FinancialProgress"
                  id="FinancialProgress" />
           <div id="FinancialSlider" class="jQuery-Slider"></div>
-
-          <label for="Remarks">
-            <span class>Remarks</span>
-            <input type="text" name="Remarks" id="Remarks"
-                   placeholder="Remarks"/>
-          </label>
+          <div class="FieldGroup">
+            <label for="OldRemarks">
+              <span class="myfont">Old Remarks</span>
+              <input type="text" name="OldRemarks" id="OldRemarks"
+                     placeholder="OldRemarks" readonly="readonly"/>
+            </label>
+          </div>
+          <div class="FieldGroup">
+            <label for="Remarks">
+              <span class="myfont">Give a New Remarks Here..!</span>
+              <input type="text" name="Remarks" id="Remarks"
+                     placeholder="Remarks" required/>
+            </label>
+          </div>
+          <div class="FieldGroup">
+            <input type="hidden" id="ProgressID" name="ProgressID"/>
+          </div>
         </div>
         <div style="clear: both;"></div>
         <div class="formControl">

@@ -13,8 +13,6 @@ $(function() {
     buttonImage: "images/calendar.gif",
     buttonImageOnly: true
   });
-  $("#ProjectID").chosen({width: "250px",
-    no_results_text: "Oops, nothing found!"});
   $("#PhysicalSlider").slider({
     range: "min",
     value: 0,
@@ -72,7 +70,8 @@ $(function() {
               });
       $('#ProjectID').html(Options)
               .trigger("chosen:updated");
-      $('#ProjectID').data('ProjectID', DataResp.ProjectID);
+      $('#ProjectID').data('Projects', DataResp.Projects);
+      $('#ProgressID').data('Progress', DataResp.Progress);
       delete DataResp;
       $("#Msg").html('');
     }
@@ -83,6 +82,29 @@ $(function() {
   }).fail(function(msg) {
     $('#Msg').html(msg);
   });
+  // set the slider min value depand on the project name.......
+  $("#ProjectID").chosen({width: "250px",
+    no_results_text: "Oops, nothing found!"
+  }).change(function() {
+    var ProjectID = Number($(this).val());
+    var Progress = $('#ProgressID').data('Progress');
+    $.each(Progress.Data,
+            function(index, value) {
+              if (value.ProjectID === ProjectID)
+              {
+                $('#PhysicalSlider').slider("value", value.PhysicalProgress);
+                $('#FinancialSlider').slider("value", value.FinancialProgress);
+                $("#lblPhysicalProgress").html("Physical Progress: " +
+                        value.PhysicalProgress + "%");
+                $("#lblFinancialProgress").html("Financial Progress: " +
+                        value.FinancialProgress + "%");
+                $('#LastReportDate').val(value.ReportDate);
+                $('#OldRemarks').val(value.Remarks);
+                return false;
+              }
+            });
+  });
+
   //****************************************
   //calling ajax for saving data.............
   $("form").on("submit", function(event) {
