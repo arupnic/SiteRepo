@@ -137,7 +137,7 @@ $(function() {
         $("#FormToken").val(DataResp.FormToken);
         $("#AjaxToken").val(DataResp.AjaxToken);
         $("#Msg").html(DataResp.Msg);
-        if ($("#CheckVal").val() === null)
+        if (DataResp.CheckVal === null)
         {
           $('#frmSector').trigger("reset");
         }
@@ -178,7 +178,7 @@ $(function() {
         $("#AjaxToken").val(DataResp.AjaxToken);
         $("#Msg").html(DataResp.Msg);
         $("#CheckVal").html(DataResp.CheckVal);
-        if ($("#CheckVal").val() === null)
+        if (DataResp.CheckVal === null)
         {
           $('#frmScheme').trigger("reset");
           $("#DeptID").trigger("chosen:updated");
@@ -222,7 +222,7 @@ $(function() {
         $("#FormToken").val(DataResp.FormToken);
         $("#AjaxToken").val(DataResp.AjaxToken);
         $("#Msg").html(DataResp.Msg);
-        if ($("#CheckVal").val() === null)
+        if (DataResp.CheckVal === null)
         {
           $('#frmProject').trigger("reset");
           $("#SchemeID").trigger("chosen:updated");

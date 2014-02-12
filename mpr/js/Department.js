@@ -1,6 +1,8 @@
 $(function() {
   $('input[type="submit"]').button();
   $('input[type="reset"]').button();
+  $("#HODMobile").numericInput();
+  $("#DeptNumber").numericInput();
 //calling ajax for saving data.............
   $("form").on("submit", function(event) {
     event.preventDefault();
@@ -31,8 +33,8 @@ $(function() {
         delete data;
         $("#FormToken").val(DataResp.FormToken);
         $("#Ajax").val(DataResp.FormToken);
-        $("#Msg").html(DataResp.Msg);
-        if ($("#CheckVal").val() === null)
+        $("#Msg").html(DataResp.Msg + DataResp.CheckVal);
+        if (DataResp.CheckVal === null)
         {
           $('#frmDepartment').trigger("reset");
         }

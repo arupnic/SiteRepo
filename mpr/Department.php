@@ -7,6 +7,7 @@ WebLib::IncludeCSS();
 WebLib::JQueryInclude();
 //WebLib::IncludeJS('mpr/js/forms.js');
 WebLib::IncludeJS('mpr/js/Department.js');
+WebLib::IncludeJS('mpr/js/neumeric.js');
 WebLib::IncludeCSS('mpr/css/forms.css');
 WebLib::IncludeCSS('css/chosen.css');
 WebLib::IncludeJS('js/chosen.jquery.min.js');
@@ -48,7 +49,7 @@ WebLib::IncludeJS('js/chosen.jquery.min.js');
         <div class="FieldGroup">
           <label for="HODMobile"><span class="myfont">Mobile Number Of HOD</span>
             <input type=text name="HODMobile" id="HODMobile" value=""
-                   placeholder="Mobile Number" required/>
+                   placeholder="Mobile Number" maxlength="10" required/>
           </label>
         </div>
         <div class="FieldGroup">
@@ -61,7 +62,7 @@ WebLib::IncludeJS('js/chosen.jquery.min.js');
         <div class="FieldGroup">
           <label for="DeptNumber"><span class="myfont">Land Line Number Of Department</span>
             <input type=text name="DeptNumber" id="DeptNumber" value=""
-                   placeholder="Landline Number" required/>
+                   placeholder="Landline Number" maxlength="11" required/>
           </label>
         </div>
         <div class="FieldGroup">

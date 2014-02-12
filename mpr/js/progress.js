@@ -135,7 +135,7 @@ $(function() {
         $("#FormToken").val(DataResp.FormToken);
         $("#AjaxToken").val(DataResp.AjaxToken);
         $("#Msg").html(DataResp.Msg);
-        if ($("#CheckVal").val() === null)
+        if (DataResp.CheckVal === null)
         {
           $('#frmProgress').trigger("reset");
           $("#ProjectID").trigger("chosen:updated");
