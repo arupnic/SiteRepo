@@ -85,7 +85,10 @@ function SQLDefs($ObjectName) {
           . '`PhysicalProgress` INT(10),'
           . '`FinancialProgress` INT(10),'
           . '`Remarks` VARCHAR(300) DEFAULT NULL,'
-          . ' PRIMARY KEY (`ReportID`)'
+          . ' PRIMARY KEY (`ReportID`),'
+          . ' CONSTRAINT `FK_ProjectID` FOREIGN KEY (`ProjectID`)'
+          . ' REFERENCES `' . MySQL_Pre . 'MPR_Projects` (`ProjectID`) '
+          . ' ON UPDATE CASCADE'
           . ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
       break;
     case 'MPR_UserMaps':

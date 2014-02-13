@@ -101,6 +101,8 @@ WebLib::IncludeCSS('css/chosen.css');
           <input type="submit" name="CmdSubmit" value="Save Progress" id="CmdSaveUpdate">
           <input type="hidden" id="TxtAction" name="CmdSubmit" value=" " />
           <input type="reset" name="CmdReset" value="Reset">
+
+          <input type="button" value="Reload page"  id="Reload">
         </div>
         <input type="hidden" name="FormToken" id="FormToken"
                value="<?php echo WebLib::GetVal($_SESSION, 'FormToken') ?>" />

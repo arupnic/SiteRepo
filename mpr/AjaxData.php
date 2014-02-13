@@ -66,12 +66,12 @@ if (WebLib::GetVal($_POST, 'AjaxToken') ===
       $DataResp['Projects'] = array();
       doQuery($DataResp['Projects'], $Query);
 
-      $Query                = 'Select `ProjectID`,`PhysicalProgress`,`'
-          . 'FinancialProgress`,`ReportDate`,`Remarks`'
-          . ' FROM `' . MySQL_Pre . 'MPR_Progress`'
-          . ' Order by `ProjectID`';
-      $DataResp['Progress'] = array();
+      $Query                            = 'Select * FROM `' . MySQL_Pre . 'MPR_Progress`'
+          . ' Order by `ReportID` DESC';
+      $DataResp['Progress']             = array();
       doQuery($DataResp['Progress'], $Query);
+      $_SESSION['OldPhysicalProgress']  = $DataResp['Progress']['PhysicalProgress'];
+      $_SESSION['OldFinancialProgress'] = $DataResp['Progress']['FinancialProgress'];
       break;
 
     case 'GetChosenData':

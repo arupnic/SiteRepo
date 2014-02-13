@@ -13,7 +13,8 @@ if (WebLib::GetVal($_POST, 'FormToken') !== NULL) {
       WebLib::GetVal($_SESSION, 'FormToken')) {
     $_SESSION['action'] = 1;
   } else {
-    // Authenticated Inputs
+
+// Authenticated Inputs
     switch (WebLib::GetVal($_POST, 'CmdSubmit')) {
       case 'Create Department':
         $DataMPR['DeptName']    = WebLib::GetVal($_POST, 'DeptName');
@@ -23,6 +24,7 @@ if (WebLib::GetVal($_POST, 'FormToken') !== NULL) {
         $DataMPR['DeptNumber']  = WebLib::GetVal($_POST, 'DeptNumber');
         $DataMPR['Strength']    = WebLib::GetVal($_POST, 'Strength');
         $DataMPR['DeptAddress'] = WebLib::GetVal($_POST, 'DeptAddress');
+
         if (strlen($DataMPR['DeptName']) > 2) {
           $DataMPR['UserMapID'] = $_SESSION['UserMapID'];
           $Query                = MySQL_Pre . 'MPR_Departments';
@@ -93,13 +95,22 @@ if (WebLib::GetVal($_POST, 'FormToken') !== NULL) {
         $DataMPR['FinancialProgress'] = WebLib::GetVal($_POST,
                                                        'FinancialProgress');
         $DataMPR['Remarks']           = WebLib::GetVal($_POST, 'Remarks');
-        if ((strlen($DataMPR['Remarks']) > 2) && ($DataMPR['ProjectID'] !== null)) {
-          $DataMPR['UserMapID'] = $_SESSION['UserMapID'];
-          $Query                = MySQL_Pre . 'MPR_Progress';
-          $_SESSION['Msg']      = 'Progress Created Successfully!';
-        } else {
+
+
+        if (($DataMPR['PhysicalProgress'] < $_SESSION['OldPhysicalProgress']) ||
+            ($DataMPR['FinancialProgress']) < $_SESSION['OldFinancialProgress']) {
           $Query           = '';
-          $_SESSION['Msg'] = 'Report must be at least 3 characters or more.';
+          $_SESSION['Msg'] = 'Physical & Financial Progress can not be decreased than'
+              . ' previous report';
+        } else {
+          if ((strlen($DataMPR['Remarks']) > 2) && ($DataMPR['ProjectID'] !== null)) {
+            $DataMPR['UserMapID'] = $_SESSION['UserMapID'];
+            $Query                = MySQL_Pre . 'MPR_Progress';
+            $_SESSION['Msg']      = 'Progress Created Successfully!';
+          } else {
+            $Query           = '';
+            $_SESSION['Msg'] = 'Report must be at least 3 characters or more.';
+          }
         }
         break;
       case 'GetREPORTData':
@@ -145,5 +156,4 @@ function doQuery(&$DataResp,
   unset($Result);
   unset($Data);
 }
-
 ?>

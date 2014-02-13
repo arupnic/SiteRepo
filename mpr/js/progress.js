@@ -5,6 +5,7 @@
 
 $(function() {
   $('input[type="submit"]').button();
+  $('input[type="button"]').button();
   $('input[type="delete"]').button();
   $('input[type="reset"]').button();
   $('#ReportDate').datepicker({
@@ -36,7 +37,9 @@ $(function() {
 //  $('#CmdDel').on("click", function() {
 //    $("#TxtAction").val($(this).val());
 //  });
-
+  $('#Reload').click(function() {
+    location.reload()
+  });
   $('#CmdSaveUpdate').on("click", function() {
     $("#TxtAction").val($(this).val());
   });
