@@ -41,7 +41,7 @@ $(function() {
 //  });
   $('#Reload').click(function() {
     $('#frmProgress').trigger("reset");
-    $("#ProjectID").trigger("chosen:updated");
+    $("#SchemeID").trigger("chosen:updated");
     $('#PhysicalSlider').slider("value", 0);
     $('#FinancialSlider').slider("value", 0);
     $("#lblPhysicalProgress").html("Physical Progress:");
@@ -71,16 +71,16 @@ $(function() {
       $('#Msg').html(DataResp.Msg);
       $('#ED').html(DataResp.RT);
       var Options = '<option value=""></option>';
-      $.each(DataResp.Projects.Data,
+      $.each(DataResp.Schemes.Data,
               function(index, value) {
-                //option for Projects...
-                Options += '<option value="' + value.ProjectID + '">'
-                        + value.ProjectID + ' - ' + value.ProjectName
+                //option for Schemes...
+                Options += '<option value="' + value.SchemeID + '">'
+                        + value.SchemeID + ' - ' + value.SchemeName
                         + '</option>';
               });
-      $('#ProjectID').html(Options)
+      $('#SchemeID').html(Options)
               .trigger("chosen:updated");
-      $('#ProjectID').data('Projects', DataResp.Projects);
+      $('#SchemeID').data('Schemes', DataResp.Schemes);
       $('#ProgressID').data('Progress', DataResp.Progress);
       delete DataResp;
       $("#Msg").html('');
@@ -92,15 +92,15 @@ $(function() {
   }).fail(function(msg) {
     $('#Msg').html(msg);
   });
-  // set the slider min value depand on the project name.......
-  $("#ProjectID").chosen({width: "250px",
+  // set the slider min value depand on the Scheme name.......
+  $("#SchemeID").chosen({width: "250px",
     no_results_text: "Oops, nothing found!"
   }).change(function() {
-    var ProjectID = Number($(this).val());
+    var SchemeID = Number($(this).val());
     var Progress = $('#ProgressID').data('Progress');
     $.each(Progress.Data,
             function(index, value) {
-              if (value.ProjectID === ProjectID)
+              if (value.SchemeID === SchemeID)
               {
                 $('#PhysicalSlider').slider("value", value.PhysicalProgress);
                 $('#FinancialSlider').slider("value", value.FinancialProgress);
@@ -136,7 +136,7 @@ $(function() {
         'FormToken': $('#FormToken').val(),
         'AjaxToken': $('#AjaxToken').val(),
         'CmdSubmit': 'Save Progress',
-        'ProjectID': $("#ProjectID").val(),
+        'SchemeID': $("#SchemeID").val(),
         'ReportDate': $("#ReportDate").val(),
         'PhysicalProgress': $("#PhysicalProgress").val(),
         'FinancialProgress': $("#FinancialProgress").val(),
@@ -154,7 +154,7 @@ $(function() {
         if (DataResp.CheckVal === null)
         {
           $('#frmProgress').trigger("reset");
-          $("#ProjectID").trigger("chosen:updated");
+          $("#SchemeID").trigger("chosen:updated");
           $('#PhysicalSlider').slider("value", 0);
           $('#FinancialSlider').slider("value", 0);
           $("#lblPhysicalProgress").html("Physical Progress:");

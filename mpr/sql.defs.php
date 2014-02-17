@@ -120,14 +120,14 @@ function SQLDefs($ObjectName) {
       $SqlDB = 'CREATE TABLE IF NOT EXISTS `' . MySQL_Pre . $ObjectName . '` ('
           . '`ReportID` int(10) NOT NULL AUTO_INCREMENT,'
           . '`UserMapID` INT(10) DEFAULT 1,'
-          . '`ProjectID` INT(10),'
+          . '`SchemeID` INT(10),'
           . '`ReportDate` date,'
           . '`PhysicalProgress` INT(10),'
           . '`FinancialProgress` INT(10),'
           . '`Remarks` VARCHAR(300) DEFAULT NULL,'
           . ' PRIMARY KEY (`ReportID`),'
-          . ' CONSTRAINT `FK_ProjectID` FOREIGN KEY (`ProjectID`)'
-          . ' REFERENCES `' . MySQL_Pre . 'MPR_Projects` (`ProjectID`) '
+          . ' CONSTRAINT `FK_SchemeID` FOREIGN KEY (`SchemeID`)'
+          . ' REFERENCES `' . MySQL_Pre . 'MPR_Schemes` (`SchemeID`) '
           . ' ON UPDATE CASCADE'
           . ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
       break;
@@ -143,9 +143,7 @@ function SQLDefs($ObjectName) {
           . '(`AppID`,`MenuOrder`,`AuthMenu`,`Caption`,`URL`,`Activated`) VALUES'
           . '(\'MPR\', 1, 0, \'Home\', \'index.php\', 1),'
           . '(\'MPR\', 2, 1, \'Department\', \'mpr/Department.php\', 1),'
-          . '(\'MPR\', 3, 1, \'Sectors\', \'mpr/Sectors.php\', 1),'
           . '(\'MPR\', 4, 1, \'Schemes\', \'mpr/Schemes.php\', 1),'
-          . '(\'MPR\', 5, 1, \'Projects\', \'mpr/Projects.php\', 1),'
           . '(\'MPR\', 6, 1, \'Progress\', \'mpr/Progress.php\', 1),'
           . '(\'MPR\', 7, 1, \'Reports\', \'mpr/Reports.php\', 1),'
           . '(\'MPR\', 8, 1, \'Log Out!\', \'login.php?LogOut=1\', 1);';

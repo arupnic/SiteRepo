@@ -45,10 +45,10 @@ WebLib::IncludeCSS('css/chosen.css');
         ?>
         <div class="FieldGroup">
           <div class="FieldGroup">
-            <label for="ProjectName">
-              <span class="myfont">Project Name</span>
-              <select name="ProjectID" id="ProjectID"
-                      data-placeholder="Select Project">
+            <label for="SchemeID">
+              <span class="myfont">Scheme Name</span>
+              <select name="SchemeID" id="SchemeID"
+                      data-placeholder="Select Scheme">
               </select>
             </label>
           </div>

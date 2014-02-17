@@ -47,19 +47,14 @@ if (WebLib::GetVal($_POST, 'AjaxToken') ===
           . ' Order by `SchemeName`';
       $DataResp['SchemeID'] = array();
       doQuery($DataResp['SchemeID'], $Query);
-      $Query                = 'Select `ProjectID`,`ProjectName`,`SchemeID`'
-          . ' FROM `' . MySQL_Pre . 'MPR_Projects`'
-          . ' Order by `ProjectName`';
-      $DataResp['Reports']  = array();
-      doQuery($DataResp['Reports'], $Query);
       break;
 
     case 'GetProjectData':
-      $Query                = 'Select `ProjectID`,`ProjectName`'
-          . ' FROM `' . MySQL_Pre . 'MPR_Projects`'
-          . ' Order by `ProjectID`';
-      $DataResp['Projects'] = array();
-      doQuery($DataResp['Projects'], $Query);
+      $Query               = 'Select `SchemeID`,`SchemeName`'
+          . ' FROM `' . MySQL_Pre . 'MPR_Schemes`'
+          . ' Order by `SchemeName`';
+      $DataResp['Schemes'] = array();
+      doQuery($DataResp['Schemes'], $Query);
 
       $Query                = 'Select * FROM `' . MySQL_Pre . 'MPR_Progress`'
           . ' Order by `ReportID` DESC';

@@ -1,7 +1,12 @@
 $(function() {
   $('input[type="button"]').button();
   $('input[type="reset"]').button();
-// +
+  $('#CmdReset').click(function() {
+    $('#frmScheme').trigger("reset");
+    $("#DeptID").trigger("chosen:updated");
+    $("#BlockID").trigger("chosen:updated");
+    $("#SectorID").trigger("chosen:updated");
+  });
 
   $('#StartDate').datepicker({
     dateFormat: 'dd-mm-yy',
@@ -37,8 +42,7 @@ $(function() {
     no_results_text: "Oops, nothing found!"});
   $("#SectorID").chosen({width: "250px",
     no_results_text: "Oops, nothing found!"});
-  $("#SchemeID").chosen({width: "250px",
-    no_results_text: "Oops, nothing found!"});
+
   $("#BlockID").chosen({width: "250px",
     no_results_text: "Oops, nothing found!"});
   // Ajax call...............
@@ -144,6 +148,7 @@ $(function() {
         {
           $('#frmScheme').trigger("reset");
           $("#DeptID").trigger("chosen:updated");
+          $("#BlockID").trigger("chosen:updated");
           $("#SectorID").trigger("chosen:updated");
         }
         delete DataResp;

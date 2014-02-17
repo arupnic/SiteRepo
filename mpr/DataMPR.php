@@ -63,7 +63,7 @@ if (WebLib::GetVal($_POST, 'FormToken') !== NULL) {
         break;
 
       case 'Save Progress':
-        $DataMPR['ProjectID']         = WebLib::GetVal($_POST, 'ProjectID');
+        $DataMPR['SchemeID']          = WebLib::GetVal($_POST, 'SchemeID');
         $DataMPR['ReportDate']        = WebLib::ToDBDate(WebLib::GetVal($_POST,
                                                                         'ReportDate'));
         $DataMPR['PhysicalProgress']  = WebLib::GetVal($_POST,
@@ -81,7 +81,7 @@ if (WebLib::GetVal($_POST, 'FormToken') !== NULL) {
           $_SESSION['Msg'] = 'Physical & Financial Progress can not be decreased than'
               . ' previous report';
         } else {
-          if ((strlen($DataMPR['Remarks']) > 2) && ($DataMPR['ProjectID'] !== null)) {
+          if ((strlen($DataMPR['Remarks']) > 2) && ($DataMPR['SchemeID'] !== null)) {
             $DataMPR['UserMapID'] = $_SESSION['UserMapID'];
             $Query                = MySQL_Pre . 'MPR_Progress';
             $_SESSION['Msg']      = 'Progress Created Successfully!';

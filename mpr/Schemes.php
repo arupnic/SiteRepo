@@ -113,7 +113,7 @@ WebLib::IncludeCSS('mpr/css/forms.css');
           <div class="formControl">
             <input type="hidden" id="TxtAction" name="CmdSubmit" value="" />
             <input type="button" name="CmdSubmit" value="Create Scheme" id="CmdSaveScheme"/>
-            <input type="reset" name="CmdReset" value="Reset">
+            <input type="button" name="CmdReset" id="CmdReset" value="Reset">
           </div>
           <input type="hidden" name="FormToken" id="FormToken"
                  value="<?php echo WebLib::GetVal($_SESSION, 'FormToken') ?>" />
