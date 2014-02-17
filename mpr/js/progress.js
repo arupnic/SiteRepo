@@ -4,6 +4,8 @@
  */
 
 $(function() {
+  var OldPhysicalProgress;
+  var OldFinancialProgress;
   $('input[type="submit"]').button();
   $('input[type="button"]').button();
   $('input[type="delete"]').button();
@@ -38,7 +40,12 @@ $(function() {
 //    $("#TxtAction").val($(this).val());
 //  });
   $('#Reload').click(function() {
-    location.reload()
+    $('#frmProgress').trigger("reset");
+    $("#ProjectID").trigger("chosen:updated");
+    $('#PhysicalSlider').slider("value", 0);
+    $('#FinancialSlider').slider("value", 0);
+    $("#lblPhysicalProgress").html("Physical Progress:");
+    $("#lblFinancialProgress").html("Physical Progress: ");
   });
   $('#CmdSaveUpdate').on("click", function() {
     $("#TxtAction").val($(this).val());
@@ -103,6 +110,10 @@ $(function() {
                         value.FinancialProgress + "%");
                 $('#LastReportDate').val(value.ReportDate);
                 $('#OldRemarks').val(value.Remarks);
+                $("#FinancialProgress").val(value.FinancialProgress);
+                $("#PhysicalProgress").val(value.PhysicalProgress);
+                OldPhysicalProgress = (value.PhysicalProgress);
+                OldFinancialProgress = (value.FinancialProgress);
                 return false;
               }
             });
@@ -129,7 +140,9 @@ $(function() {
         'ReportDate': $("#ReportDate").val(),
         'PhysicalProgress': $("#PhysicalProgress").val(),
         'FinancialProgress': $("#FinancialProgress").val(),
-        'Remarks': $("#Remarks").val()
+        'Remarks': $("#Remarks").val(),
+        'OldPhysicalProgress': OldPhysicalProgress,
+        'OldFinancialProgress': OldFinancialProgress
       }
     }).done(function(data) {
       try {
@@ -144,6 +157,8 @@ $(function() {
           $("#ProjectID").trigger("chosen:updated");
           $('#PhysicalSlider').slider("value", 0);
           $('#FinancialSlider').slider("value", 0);
+          $("#lblPhysicalProgress").html("Physical Progress:");
+          $("#lblFinancialProgress").html("Physical Progress: ");
         }
         delete DataResp;
       }

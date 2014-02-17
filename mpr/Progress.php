@@ -100,14 +100,15 @@ WebLib::IncludeCSS('css/chosen.css');
         <div class="formControl">
           <input type="submit" name="CmdSubmit" value="Save Progress" id="CmdSaveUpdate">
           <input type="hidden" id="TxtAction" name="CmdSubmit" value=" " />
-          <input type="reset" name="CmdReset" value="Reset">
-
-          <input type="button" value="Reload page"  id="Reload">
+          <input type="button" value="Refresh"  id="Reload">
         </div>
         <input type="hidden" name="FormToken" id="FormToken"
                value="<?php echo WebLib::GetVal($_SESSION, 'FormToken') ?>" />
         <input type="hidden" name="AjaxToken" id="AjaxToken"
                value="<?php echo WebLib::GetVal($_SESSION, 'Token'); ?>" />
+<!--        <pre id="Error">
+        </pre>-->
+      </form>
     </div>
   </div>
   <div class="pageinfo">

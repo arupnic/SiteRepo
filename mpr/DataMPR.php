@@ -95,10 +95,12 @@ if (WebLib::GetVal($_POST, 'FormToken') !== NULL) {
         $DataMPR['FinancialProgress'] = WebLib::GetVal($_POST,
                                                        'FinancialProgress');
         $DataMPR['Remarks']           = WebLib::GetVal($_POST, 'Remarks');
-
-
-        if (($DataMPR['PhysicalProgress'] < $_SESSION['OldPhysicalProgress']) ||
-            ($DataMPR['FinancialProgress']) < $_SESSION['OldFinancialProgress']) {
+        $OldPhysicalProgress          = WebLib::GetVal($_POST,
+                                                       'OldPhysicalProgress');
+        $OldFinancialProgress         = WebLib::GetVal($_POST,
+                                                       'OldFinancialProgress');
+        if (($DataMPR['PhysicalProgress'] < $OldPhysicalProgress) ||
+            ($DataMPR['FinancialProgress']) < $OldFinancialProgress) {
           $Query           = '';
           $_SESSION['Msg'] = 'Physical & Financial Progress can not be decreased than'
               . ' previous report';
@@ -156,4 +158,5 @@ function doQuery(&$DataResp,
   unset($Result);
   unset($Data);
 }
+
 ?>

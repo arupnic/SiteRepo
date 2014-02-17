@@ -54,11 +54,6 @@ if (WebLib::GetVal($_POST, 'AjaxToken') ===
       doQuery($DataResp['Reports'], $Query);
       break;
 
-    default :
-      $DataResp['Msg'] = 'Invalid API Call';
-      break;
-
-
     case 'GetProjectData':
       $Query                = 'Select `ProjectID`,`ProjectName`'
           . ' FROM `' . MySQL_Pre . 'MPR_Projects`'
@@ -66,12 +61,12 @@ if (WebLib::GetVal($_POST, 'AjaxToken') ===
       $DataResp['Projects'] = array();
       doQuery($DataResp['Projects'], $Query);
 
-      $Query                            = 'Select * FROM `' . MySQL_Pre . 'MPR_Progress`'
+      $Query                = 'Select * FROM `' . MySQL_Pre . 'MPR_Progress`'
           . ' Order by `ReportID` DESC';
-      $DataResp['Progress']             = array();
+      $DataResp['Progress'] = array();
       doQuery($DataResp['Progress'], $Query);
-      $_SESSION['OldPhysicalProgress']  = $DataResp['Progress']['PhysicalProgress'];
-      $_SESSION['OldFinancialProgress'] = $DataResp['Progress']['FinancialProgress'];
+//      $_SESSION['OldPhysicalProgress']  = $DataResp['Progress']['PhysicalProgress'];
+//      $_SESSION['OldFinancialProgress'] = $DataResp['Progress']['FinancialProgress'];
       break;
 
     case 'GetChosenData':
