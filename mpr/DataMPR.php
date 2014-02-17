@@ -35,22 +35,23 @@ if (WebLib::GetVal($_POST, 'FormToken') !== NULL) {
         }
         break;
 
-      case 'Create Sector':
-        $DataMPR['SectorName'] = WebLib::GetVal($_POST, 'SectorName');
-        if (strlen($DataMPR['SectorName']) > 2) {
-          $DataMPR['UserMapID'] = $_SESSION['UserMapID'];
-          $Query                = MySQL_Pre . 'MPR_Sectors';
-          $_SESSION['Msg']      = 'Sector Created Successfully!';
-        } else {
-          $Query           = '';
-          $_SESSION['Msg'] = 'Sector Name must be at least 3 characters or more.';
-        }
-        break;
-
       case 'Create Scheme':
-        $DataMPR['SchemeName'] = WebLib::GetVal($_POST, 'SchemeName');
-        $DataMPR['DeptID']     = WebLib::GetVal($_POST, 'DeptID');
-        $DataMPR['SectorID']   = WebLib::GetVal($_POST, 'SectorID');
+        $DataMPR['SchemeName']       = WebLib::GetVal($_POST, 'SchemeName');
+        $DataMPR['DeptID']           = WebLib::GetVal($_POST, 'DeptID');
+        $DataMPR['SectorID']         = WebLib::GetVal($_POST, 'SectorID');
+        $DataMPR['BlockID']          = WebLib::GetVal($_POST, 'BlockID');
+        $DataMPR['PhysicalTargetNo'] = WebLib::GetVal($_POST, 'PhysicalTargetNo');
+        $DataMPR['Executive']        = WebLib::GetVal($_POST, 'Executive');
+        $DataMPR['SchemeCost']       = WebLib::GetVal($_POST, 'SchemeCost');
+        $DataMPR['AlotmentAmount']   = WebLib::GetVal($_POST, 'AlotmentAmount');
+        $DataMPR['StartDate']        = WebLib::ToDBDate(WebLib::GetVal($_POST,
+                                                                       'StartDate'));
+        $DataMPR['AlotmentDate']     = WebLib::ToDBDate(WebLib::GetVal($_POST,
+                                                                       'AlotmentDate'));
+        $DataMPR['TenderDate']       = WebLib::ToDBDate(WebLib::GetVal($_POST,
+                                                                       'TenderDate'));
+        $DataMPR['WorkOrderDate']    = WebLib::ToDBDate(WebLib::GetVal($_POST,
+                                                                       'WorkOrderDate'));
         if ((strlen($DataMPR['SchemeName']) > 2) && ($DataMPR['DeptID'] !== null) && ($DataMPR['SectorID'] !== null)) {
           $DataMPR['UserMapID'] = $_SESSION['UserMapID'];
           $Query                = MySQL_Pre . 'MPR_Schemes';
@@ -58,31 +59,6 @@ if (WebLib::GetVal($_POST, 'FormToken') !== NULL) {
         } else {
           $Query           = '';
           $_SESSION['Msg'] = 'Scheme Name must be at least 3 characters or more.';
-        }
-        break;
-
-      case 'Create Project':
-        $DataMPR['SchemeID']       = WebLib::GetVal($_POST, 'SchemeID');
-        $DataMPR['ProjectName']    = WebLib::GetVal($_POST, 'ProjectName');
-        $DataMPR['ProjectCost']    = WebLib::GetVal($_POST, 'ProjectCost');
-        $DataMPR['AlotmentAmount'] = WebLib::GetVal($_POST, 'AlotmentAmount');
-        $DataMPR['StartDate']      = WebLib::ToDBDate(WebLib::GetVal($_POST,
-                                                                     'StartDate'));
-        $DataMPR['AlotmentDate']   = WebLib::ToDBDate(WebLib::GetVal($_POST,
-                                                                     'AlotmentDate'));
-        $DataMPR['TenderDate']     = WebLib::ToDBDate(WebLib::GetVal($_POST,
-                                                                     'TenderDate'));
-        $DataMPR['WorkOrderDate']  = WebLib::ToDBDate(WebLib::GetVal($_POST,
-                                                                     'WorkOrderDate'));
-
-
-        if ((strlen($DataMPR['ProjectName']) > 2) && ($DataMPR['SchemeID'] !== null)) {
-          $DataMPR['UserMapID'] = $_SESSION['UserMapID'];
-          $Query                = MySQL_Pre . 'MPR_Projects';
-          $_SESSION['Msg']      = 'Project Created Successfully!';
-        } else {
-          $Query           = '';
-          $_SESSION['Msg'] = 'Project Name must be at least 3 characters or more.';
         }
         break;
 

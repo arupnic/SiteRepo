@@ -39,7 +39,7 @@ $(function() {
     no_results_text: "Oops, nothing found!"});
   $("#SchemeID").chosen({width: "250px",
     no_results_text: "Oops, nothing found!"});
-  $("#ProjectID").chosen({width: "250px",
+  $("#BlockID").chosen({width: "250px",
     no_results_text: "Oops, nothing found!"});
   // Ajax call...............
   $.ajax({
@@ -83,25 +83,17 @@ $(function() {
       $('#SectorID').html(Options)
               .trigger("chosen:updated");
       $('#SectorID').data('SectorID', DataResp.SectorID);
-      //option for Schemes...
+      //option for BlockID...
       Options = '<option value=""></option>';
-      $.each(DataResp.SchemeID.Data,
+      $.each(DataResp.BlockID.Data,
               function(index, value) {
-                Options += '<option value="' + value.SchemeID + '">'
-                        + value.SchemeID + ' - ' + value.SchemeName
+                Options += '<option value="' + value.BlockID + '">'
+                        + value.BlockID + ' - ' + value.BlockName
                         + '</option>';
               });
-      $('#SchemeID').html(Options)
+      $('#BlockID').html(Options)
               .trigger("chosen:updated");
-      $('#SchemeID').data('SchemeID', DataResp.SchemeID);
-      //option for projects...
-      Options = '<option value=""></option>';
-      $.each(DataResp.ProjectID.Data,
-              function(index, value) {
-                Options += '<option value="' + value.ProjectID + '">'
-                        + value.ProjectID + ' - ' + value.ProjectName
-                        + '</option>';
-              });
+      $('#BlockID').data('BlockID', DataResp.BlockID);
       delete DataResp;
       $("#Msg").html('');
     }
@@ -113,45 +105,6 @@ $(function() {
     $('#Msg').html(msg);
   });
 //calling ajax for saving data.............
-//start declaring the onclick methods.............
-//for create new sector.........
-  $('#CmdSaveSector').click(function() {
-    $.ajax({
-      type: 'POST',
-      url: 'AjaxSaveData.php',
-      dataType: 'html',
-      xhrFields: {
-        withCredentials: true
-      },
-      //data: $("#frmProject").serialize(),
-      data: {
-        'FormToken': $('#FormToken').val(),
-        'AjaxToken': $('#AjaxToken').val(),
-        'CmdSubmit': $("#CmdSaveSector").val(),
-        'SectorName': $("#SectorName").val()
-      }
-    }).done(function(data) {
-      try {
-        var DataResp = $.parseJSON(data);
-        delete data;
-        $("#FormToken").val(DataResp.FormToken);
-        $("#AjaxToken").val(DataResp.AjaxToken);
-        $("#Msg").html(DataResp.Msg);
-        if (DataResp.CheckVal === null)
-        {
-          $('#frmSector').trigger("reset");
-        }
-
-        delete DataResp;
-      }
-      catch (e) {
-        $('#Msg').html('Server Error:' + e);
-        $('#Error').html(data);
-      }
-    }).fail(function(msg) {
-      $('#Msg').html(msg);
-    });
-  });
 //for create new Scheme.........
   $('#CmdSaveScheme').click(function() {
     $.ajax({
@@ -168,7 +121,16 @@ $(function() {
         'CmdSubmit': $("#CmdSaveScheme").val(),
         'DeptID': $("#DeptID").val(),
         'SectorID': $("#SectorID").val(),
-        'SchemeName': $("#SchemeName").val()
+        'BlockID': $("#BlockID").val(),
+        'SchemeName': $("#SchemeName").val(),
+        'PhysicalTargetNo': $("#PhysicalTargetNo").val(),
+        'Executive': $("#Executive").val(),
+        'SchemeCost': $("#SchemeCost").val(),
+        'AlotmentAmount': $("#AlotmentAmount").val(),
+        'StartDate': $("#StartDate").val(),
+        'AlotmentDate': $("#AlotmentDate").val(),
+        'TenderDate': $("#TenderDate").val(),
+        'WorkOrderDate': $("#WorkOrderDate").val()
       }
     }).done(function(data) {
       try {
@@ -194,52 +156,4 @@ $(function() {
       $('#Msg').html(msg);
     });
   });
-//for create new Project.........
-  $('#CmdSaveProject').click(function() {
-    $.ajax({
-      type: 'POST',
-      url: 'AjaxSaveData.php',
-      dataType: 'html',
-      xhrFields: {withCredentials: true
-      },
-      //data: $("#frmProject").serialize(),
-      data: {'FormToken': $('#FormToken').val(),
-        'AjaxToken': $('#AjaxToken').val(),
-        'CmdSubmit': $("#CmdSaveProject").val(),
-        'SchemeID': $("#SchemeID").val(),
-        'ProjectName': $("#ProjectName").val(),
-        'ProjectCost': $("#ProjectCost").val(),
-        'AlotmentAmount': $("#AlotmentAmount").val(),
-        'StartDate': $("#StartDate").val(),
-        'AlotmentDate': $("#AlotmentDate").val(),
-        'TenderDate': $("#TenderDate").val(),
-        'WorkOrderDate': $("#WorkOrderDate").val()
-      }
-    }).done(function(data) {
-      try {
-        var DataResp = $.parseJSON(data);
-        delete data;
-        $("#FormToken").val(DataResp.FormToken);
-        $("#AjaxToken").val(DataResp.AjaxToken);
-        $("#Msg").html(DataResp.Msg);
-        if (DataResp.CheckVal === null)
-        {
-          $('#frmProject').trigger("reset");
-          $("#SchemeID").trigger("chosen:updated");
-        }
-
-        delete DataResp;
-      }
-      catch (e) {
-        $('#Msg').html('Server Error:' + e);
-        $('#Error').html(data);
-      }
-    }).fail(function(msg) {
-      $('#Msg').html(msg);
-    });
-  });
-//  $("form").on("submit", function(event) {
-//    event.preventDefault();
-//    $('#Msg').html('Saving Please Wait...');
-//  });
 });

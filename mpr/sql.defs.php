@@ -5,8 +5,9 @@ function CreateSchemas() {
   $ObjDB->ddlQuery(SQLDefs('MPR_Departments'));
   $ObjDB->ddlQuery(SQLDefs('MPR_Sectors'));
   $ObjDB->ddlQuery(SQLDefs('MPR_Schemes'));
-  $ObjDB->ddlQuery(SQLDefs('MPR_Projects'));
   $ObjDB->ddlQuery(SQLDefs('MPR_Progress'));
+  $ObjDB->ddlQuery(SQLDefs('MPR_Blocks'));
+  $ObjDB->ddlQuery(SQLDefs('MPR_DataBlocks'));
   $ObjDB->ddlQuery(SQLDefs('MenuData'));
   unset($ObjDB);
 }
@@ -37,12 +38,71 @@ function SQLDefs($ObjectName) {
           . ' PRIMARY KEY (`SectorID`)'
           . ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
       break;
+    case 'MPR_Blocks':
+      $SqlDB = 'CREATE TABLE IF NOT EXISTS `' . MySQL_Pre . $ObjectName . '` ('
+          . '`BlockID` varchar(3) NOT NULL,'
+          . '`BlockName` varchar(25) DEFAULT NULL,'
+          . '`SubDivnCode` varchar(4) DEFAULT NULL,'
+          . ' PRIMARY KEY (`BlockID`)'
+          . ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
+      break;
+    case 'MPR_DataBlocks':
+      $SqlDB = 'INSERT INTO `' . MySQL_Pre . 'MPR_Blocks` '
+          . '(`BlockID`, `BlockName`, `SubDivnCode`) VALUES'
+          . '(\'0bm\', \'OTHERS\', NULL),'
+          . '(\'B01\', \'MIDNAPORE SADAR\', \'1501\'),'
+          . '(\'B02\', \'KESHPUR\', \'1501\'),'
+          . '(\'B03\', \'SALBONI\', \'1501\'),'
+          . '(\'B04\', \'GARHBETA-I\', \'1501\'),'
+          . '(\'B05\', \'GARHBETA-II\', \'1501\'),'
+          . '(\'B06\', \'GARHBETA-III\', \'1501\'),'
+          . '(\'B07\', \'KHARAGPUR-I\', \'1502\'),'
+          . '(\'B08\', \'KHARAGPUR-II\', \'1502\'),'
+          . '(\'B09\', \'DEBRA\', \'1502\'),'
+          . '(\'B10\', \'SABONG\', \'1502\'),'
+          . '(\'B11\', \'PINGLA\', \'1502\'),'
+          . '(\'B12\', \'KESHIARY\', \'1502\'),'
+          . '(\'B13\', \'DANTAN-I\', \'1502\'),'
+          . '(\'B14\', \'DANTAN-II\', \'1502\'),'
+          . '(\'B15\', \'NARAYANGARH\', \'1502\'),'
+          . '(\'B16\', \'MOHANPUR\', \'1502\'),'
+          . '(\'B17\', \'GHATAL\', \'1503\'),'
+          . '(\'B18\', \'CHANDRAKONA-I\', \'1503\'),'
+          . '(\'B19\', \'CHANDRAKONA-II\', \'1503\'),'
+          . '(\'B20\', \'DASPUR-I\', \'1503\'),'
+          . '(\'B21\', \'DASPUR-II\', \'1503\'),'
+          . '(\'B22\', \'JHARGRAM\', \'1504\'),'
+          . '(\'B23\', \'BINPUR-I\', \'1504\'),'
+          . '(\'B24\', \'BINPUR-II\', \'1504\'),'
+          . '(\'B25\', \'GOPIBALLAVPUR-I\', \'1504\'),'
+          . '(\'B26\', \'GOPIBALLAVPUR-II\', \'1504\'),'
+          . '(\'B27\', \'NAYAGRAM\', \'1504\'),'
+          . '(\'B28\', \'SANKRAIL\', \'1504\'),'
+          . '(\'B29\', \'JAMBONI\', \'1504\'),'
+          . '(\'M01\', \'MIDNAPORE MUNICIPALITY\', \'1501\'),'
+          . '(\'M02\', \'KHARAGPUR MUNICIPALITY\', \'1502\'),'
+          . '(\'M03\', \'JHARGRAM MUNICIPALITY\', \'1504\'),'
+          . '(\'M04\', \'CHANDRAKONA MUNICIPALITY\', \'1503\'),'
+          . '(\'M05\', \'KHIRPAI MUNICIPALITY\', \'1503\'),'
+          . '(\'M06\', \'RAMJIBANPUR MUNICIPALITY\', \'1503\'),'
+          . '(\'M07\', \'KHARAR MUNICIPALITY\', \'1503\'),'
+          . '(\'M08\', \'GHATAL MUNICIPALITY\', \'1503\');';
+      break;
     case 'MPR_Schemes':
       $SqlDB = 'CREATE TABLE IF NOT EXISTS `' . MySQL_Pre . $ObjectName . '` ('
           . '`SchemeID` int(10) NOT NULL AUTO_INCREMENT,'
           . '`SchemeName` VARCHAR(100) DEFAULT NULL,'
           . '`DeptID` INT(10),'
           . '`SectorID` INT(10),'
+          . '`BlockID` VARCHAR(10),'
+          . '`Executive` VARCHAR(10),'
+          . '`PhysicalTargetNo` INT(10),'
+          . '`SchemeCost` INT(10),'
+          . '`StartDate` date,'
+          . '`AlotmentAmount` INT(10),'
+          . '`AlotmentDate` date,'
+          . '`TenderDate` date,'
+          . '`WorkOrderDate` date,'
           . '`UserMapID` INT(10) DEFAULT 1,'
           . 'UNIQUE KEY `SchemeName` (`SchemeName`,`DeptID`,`SectorID`),'
           . ' PRIMARY KEY (`SchemeID`),'
@@ -53,26 +113,6 @@ function SQLDefs($ObjectName) {
           . ' ON UPDATE CASCADE,'
           . ' CONSTRAINT `FK_DeptID` FOREIGN KEY (`DeptID`) '
           . ' REFERENCES `' . MySQL_Pre . 'MPR_Departments` (`DeptID`)'
-          . ' ON UPDATE CASCADE'
-          . ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
-      break;
-    case 'MPR_Projects':
-      $SqlDB = 'CREATE TABLE IF NOT EXISTS `' . MySQL_Pre . $ObjectName . '` ('
-          . '`ProjectID` int(10) NOT NULL AUTO_INCREMENT,'
-          . '`SchemeID` INT(10),'
-          . '`UserMapID` INT(10) DEFAULT 1,'
-          . '`ProjectName` VARCHAR(100) DEFAULT NULL,'
-          . '`ProjectCost` INT(10),'
-          . '`StartDate` date,'
-          . '`AlotmentAmount` INT(10),'
-          . '`AlotmentDate` date,'
-          . '`TenderDate` date,'
-          . '`WorkOrderDate` date,'
-          . ' PRIMARY KEY (`ProjectID`),'
-          . ' UNIQUE KEY `ProjectName` (`ProjectName`,`SchemeID`),'
-          . ' KEY `SchemeID` (`SchemeID`),'
-          . ' CONSTRAINT `FK_SchemeID` FOREIGN KEY (`SchemeID`)'
-          . ' REFERENCES `' . MySQL_Pre . 'MPR_Schemes` (`SchemeID`) '
           . ' ON UPDATE CASCADE'
           . ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
       break;
