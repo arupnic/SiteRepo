@@ -4,6 +4,7 @@ function CreateSchemas() {
   $ObjDB = new MySQLiDBHelper();
   $ObjDB->ddlQuery(SQLDefs('MPR_Departments'));
   $ObjDB->ddlQuery(SQLDefs('MPR_Sectors'));
+  $ObjDB->ddlQuery(SQLDefs('MPR_DataSectors'));
   $ObjDB->ddlQuery(SQLDefs('MPR_Schemes'));
   $ObjDB->ddlQuery(SQLDefs('MPR_Progress'));
   $ObjDB->ddlQuery(SQLDefs('MPR_Blocks'));
@@ -33,10 +34,27 @@ function SQLDefs($ObjectName) {
       $SqlDB = 'CREATE TABLE IF NOT EXISTS `' . MySQL_Pre . $ObjectName . '` ('
           . '`SectorID` int(10) NOT NULL AUTO_INCREMENT,'
           . '`SectorName` VARCHAR(100) DEFAULT NULL,'
-          . '`UserMapID` INT(10) DEFAULT 1,'
           . 'UNIQUE KEY `SectorName` (`SectorName`),'
           . ' PRIMARY KEY (`SectorID`)'
           . ') ENGINE=InnoDB DEFAULT CHARSET=utf8;';
+      break;
+    case 'MPR_DataSectors':
+      $SqlDB = 'INSERT INTO `' . MySQL_Pre . 'MPR_Sectors` '
+          . '(`SectorID`, `SectorName`) VALUES'
+          . '(\'00\', \'OTHERS\'),'
+          . '(\'01\', \'AGRICULTURE\'),'
+          . '(\'02\', \'COMMUNITY HALL\'),'
+          . '(\'03\', \'DRINKING WATER\'),'
+          . '(\'04\', \'EDUCATION\'),'
+          . '(\'05\', \'FOOD\'),'
+          . '(\'06\', \'HEALTH\'),'
+          . '(\'07\', \'IRRIGATION\'),'
+          . '(\'08\', \'LIVELIHOOD\'),'
+          . '(\'09\', \'MARKET INFRS.\'),'
+          . '(\'10\', \'NUTRITION\'),'
+          . '(\'11\', \'ROAD\'),'
+          . '(\'12\', \'SANITATION\'),'
+          . '(\'13\', \'TRIBAL HOUSE\');';
       break;
     case 'MPR_Blocks':
       $SqlDB = 'CREATE TABLE IF NOT EXISTS `' . MySQL_Pre . $ObjectName . '` ('
@@ -146,6 +164,7 @@ function SQLDefs($ObjectName) {
           . '(\'MPR\', 4, 1, \'Schemes\', \'mpr/Schemes.php\', 1),'
           . '(\'MPR\', 6, 1, \'Progress\', \'mpr/Progress.php\', 1),'
           . '(\'MPR\', 7, 1, \'Reports\', \'mpr/Reports.php\', 1),'
+          . '(\'MPR\', 7, 1, \'IAP_Reports\', \'mpr/IAP_Reports.php\', 1),'
           . '(\'MPR\', 8, 1, \'Log Out!\', \'login.php?LogOut=1\', 1);';
       break;
   }

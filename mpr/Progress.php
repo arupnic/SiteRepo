@@ -44,58 +44,57 @@ WebLib::IncludeCSS('css/chosen.css');
         $Data1 = new MySQLiDBHelper();
         ?>
         <div class="FieldGroup">
-          <div class="FieldGroup">
-            <label for="SchemeID">
-              <span class="myfont">Scheme Name</span>
-              <select name="SchemeID" id="SchemeID"
-                      data-placeholder="Select Scheme">
-              </select>
-            </label>
-          </div>
-          <div class="FieldGroup">
-            <label for="ReportDate">
-              <span class="myfont">Report Date</span>
-              <input type="text" id="ReportDate" name="ReportDate"
-                     placeholder="YYYY-MM-DD" size="12" required />
-            </label>
-          </div>
-          <div class="FieldGroup">
-            <label for="LastReportDate">
-              <span class="myfont">Last Report Date</span>
-              <input type="text" id="LastReportDate" name="LastReportDate"
-                     placeholder="LastReportDate" size="12" readonly="readonly"/>
-            </label>
-          </div>
-          <div style="clear: both;"></div>
-
-          <h3 id="lblPhysicalProgress">Physical Progress</h3>
-          <input type="hidden" name="PhysicalProgress"
-                 id="PhysicalProgress" />
-          <div style="clear: both;"></div>
-          <div id="PhysicalSlider" class="jQuery-Slider"></div>
-
-          <h3 id="lblFinancialProgress">Financial Progress</h3>
-          <input type="hidden" name="FinancialProgress"
-                 id="FinancialProgress" />
-          <div id="FinancialSlider" class="jQuery-Slider"></div>
-          <div class="FieldGroup">
-            <label for="OldRemarks">
-              <span class="myfont">Old Remarks</span>
-              <input type="text" name="OldRemarks" id="OldRemarks"
-                     placeholder="OldRemarks" readonly="readonly"/>
-            </label>
-          </div>
-          <div class="FieldGroup">
-            <label for="Remarks">
-              <span class="myfont">Give a New Remarks Here..!</span>
-              <input type="text" name="Remarks" id="Remarks"
-                     placeholder="Remarks" required/>
-            </label>
-          </div>
-          <div class="FieldGroup">
-            <input type="hidden" id="ProgressID" name="ProgressID"/>
-          </div>
+          <label for="SchemeID">
+            <span class="myfont">Scheme Name</span>
+            <select name="SchemeID" id="SchemeID"
+                    data-placeholder="Select Scheme">
+            </select>
+          </label>
         </div>
+        <div class="FieldGroup">
+          <label for="ReportDate">
+            <span class="myfont">Report Date</span>
+            <input type="text" id="ReportDate" name="ReportDate"
+                   placeholder="YYYY-MM-DD" size="12" required />
+          </label>
+        </div>
+        <div class="FieldGroup">
+          <label for="LastReportDate">
+            <span class="myfont">Last Report Date</span>
+            <input type="text" id="LastReportDate" name="LastReportDate"
+                   placeholder="LastReportDate" size="12" readonly="readonly"/>
+          </label>
+        </div>
+        <div style="clear: both;"></div>
+
+        <h3 id="lblPhysicalProgress">Physical Progress</h3>
+        <input type="hidden" name="PhysicalProgress"
+               id="PhysicalProgress" />
+        <div style="clear: both;"></div>
+        <div id="PhysicalSlider" class="jQuery-Slider"></div>
+
+        <h3 id="lblFinancialProgress">Financial Progress</h3>
+        <input type="hidden" name="FinancialProgress"
+               id="FinancialProgress" />
+        <div id="FinancialSlider" class="jQuery-Slider"></div>
+        <div class="FieldGroup">
+          <label for="OldRemarks">
+            <span class="myfont">Old Remarks</span>
+            <input type="text" name="OldRemarks" id="OldRemarks"
+                   placeholder="OldRemarks" readonly="readonly"/>
+          </label>
+        </div>
+        <div class="FieldGroup">
+          <label for="Remarks">
+            <span class="myfont">Give a New Remarks Here..!</span>
+            <input type="text" name="Remarks" id="Remarks"
+                   placeholder="Remarks" required/>
+          </label>
+        </div>
+        <div class="FieldGroup">
+          <input type="hidden" id="ProgressID" name="ProgressID"/>
+        </div>
+
         <div style="clear: both;"></div>
         <div class="formControl">
           <input type="submit" name="CmdSubmit" value="Save Progress" id="CmdSaveUpdate">

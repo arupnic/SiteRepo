@@ -82,6 +82,19 @@ if (WebLib::GetVal($_POST, 'AjaxToken') ===
       $DataResp['BlockID']  = array();
       doQuery($DataResp['BlockID'], $Query);
       break;
+    /*
+      ;
+
+     */
+    case 'GetReportTable':
+      $_SESSION['POST']     = $_POST;
+      $Query                = 'SELECT S.SchemeID, S.SchemeName , P.ReportDate,'
+          . ' P.PhysicalProgress, P.FinancialProgress,P.Remarks '
+          . ' FROM ' . MySQL_Pre . 'MPR_Schemes S'
+          . ' INNER JOIN ' . MySQL_Pre . 'MPR_Progress P'
+          . ' ON S.SchemeID=P.SchemeID';
+      doQuery($DataResp, $Query, array(WebLib::GetVal($_POST, 'ReportID')));
+      break;
 
     default :
       $DataResp['Msg'] = 'Invalid API Call';
