@@ -47,23 +47,24 @@ WebLib::IncludeJS('mpr/js/Reports.js');
         include __DIR__ . '/DataMPR.php';
         WebLib::ShowMsg();
         ?>
+
         <div class="FieldGroup">
-          <label for="DeptID"><strong>Department</strong></label><br/>
-          <select name="DeptID" id="DeptID" data-placeholder="Select Department">
+          <label for="SectorName"><strong>Sector</strong></label><br/>
+          <select name="SectorName" id="SectorID" data-placeholder="Select Sector">
           </select>
         </div>
         <div class="FieldGroup">
-          <label for="SectorID"><strong>Sector</strong></label><br/>
-          <select name="SectorID" id="SectorID" data-placeholder="Select Sector">
+          <label for="DeptName"><strong>Department</strong></label><br/>
+          <select name="Deptname" id="DeptID" data-placeholder="Select Department">
           </select>
         </div>
         <div class="FieldGroup">
-          <label for="SchemeID"><strong>Scheme</strong></label><br/>
-          <select name="SchemeID" id="SchemeID" data-placeholder="Select Sector">
+          <label for="SchemeName"><strong>Scheme</strong></label><br/>
+          <select name="SchemeName" id="SchemeID" data-placeholder="Select Sector">
           </select>
         </div>
         <div class="FieldGroup">
-          <label for="ProjectID"><strong>Project Name</strong></label><br/>
+          <label for="ProjectName"><strong>Project Name</strong></label><br/>
           <select name="ProjectID" id="ProjectID" data-placeholder="Select Project">
           </select>
         </div>

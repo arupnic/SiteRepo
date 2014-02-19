@@ -32,21 +32,31 @@ if (WebLib::GetVal($_POST, 'AjaxToken') ===
   switch (WebLib::GetVal($_POST, 'CallAPI')) {
 
     case 'GetComboData':
-      $Query                = 'Select `DeptID`,`DeptName`'
+      $Query                 = 'Select `DeptID`,`DeptName`'
           . ' FROM `' . MySQL_Pre . 'MPR_Departments`'
           . ' Order by `DeptID`';
-      $DataResp['DeptID']   = array();
+      $DataResp['DeptID']    = array();
       doQuery($DataResp['DeptID'], $Query);
-      $Query                = 'Select `SectorID`,`SectorName`'
+      $Query                 = 'Select `SectorID`,`SectorName`'
           . ' FROM `' . MySQL_Pre . 'MPR_Sectors`'
           . ' Order by `SectorName`';
-      $DataResp['SectorID'] = array();
+      $DataResp['SectorID']  = array();
       doQuery($DataResp['SectorID'], $Query);
-      $Query                = 'Select `SchemeID`,`SchemeName`'
+      $Query                 = 'Select `SchemeID`,`SchemeName`,`SectorID`,`DeptID`'
           . ' FROM `' . MySQL_Pre . 'MPR_Schemes`'
           . ' Order by `SchemeName`';
-      $DataResp['SchemeID'] = array();
+      $DataResp['SchemeID']  = array();
       doQuery($DataResp['SchemeID'], $Query);
+      $Query                 = 'Select `ProjectID`,`ProjectName`,`SchemeID`'
+          . ' FROM `' . MySQL_Pre . 'MPR_Projects`'
+          . ' Order by `ProjectID`';
+      $DataResp['ProjectID'] = array();
+      doQuery($DataResp['ProjectID'], $Query);
+
+//      $Query                 = 'Select `ProjectID`,`ProjectName`,`SchemeID`'
+//          . ' FROM `' . MySQL_Pre . 'MPR_Projects`'
+//          . ' Order by `ProjectID`';
+//      $DataResp['ProjectID'] = $Data->rawQuery($Query);
       break;
 
     case 'GetProjectData':

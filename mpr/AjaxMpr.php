@@ -27,7 +27,7 @@ if (WebLib::GetVal($_POST, 'AjaxToken') === WebLib::GetVal($_SESSION, 'Token')) 
           . ' FROM `' . MySQL_Pre . 'MPR_Schemes`'
           . ' Order by `SchemeID`';
       $DataResp['SchemeID']  = $Data->rawQuery($Query);
-      $Query                 = 'SELECT `ProjectID`,`ProjectName`'
+      $Query                 = 'SELECT `ProjectID`,`ProjectName`,`SchemeID`'
           . ' FROM `' . MySQL_Pre . 'MPR_Projects`'
           . ' Order by `ProjectID`';
       $DataResp['ProjectID'] = $Data->rawQuery($Query);
