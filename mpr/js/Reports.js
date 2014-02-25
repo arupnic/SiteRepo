@@ -4,19 +4,56 @@
  * and open the template in the editor.
  */
 google.load('visualization', '1', {packages: ['corechart']});
-//xgoogle.setOnLoadCallback(drawVisualization);
+//google.setOnLoadCallback(drawVisualization);
 $(function() {
   $('input[type="button"]').button();
   $('#CmdRefresh').click(function() {
     drawVisualization();
   });
-//  $("#DeptID").chosen({width: "200px",
-//    no_results_text: "Oops, nothing found!"});
-//  $("#SectorID").chosen({width: "200px",
-//    no_results_text: "Oops, nothing found!"});
+//filter
+  $("#SectorID").chosen({width: "200px",
+    no_results_text: "Oops, nothing found!"
+  }).change(function() {
+    var Options = '<option value=""></option>';
+    var SchemeID = $('#SchemeID').data('SchemeID');
+    var SectorID = Number($(this).val());
+    var DeptID = Number($("#DeptID").val());
+    $.each(SchemeID.Data,
+            function(index, value) {
+              if ((value.SectorID === SectorID) && (value.DeptID === DeptID))
+              {
+                Options += '<option value="' + value.SchemeID + '">'
+                        + value.SchemeID + ' - ' + value.SchemeName
+                        + '</option>';
+              }
+            });
+    $('#SchemeID').html(Options)
+            .trigger("chosen:updated");
+  });
 
-  $("#ProjectID").chosen({width: "200px",
-    no_results_text: "Oops, nothing found!"});
+  $("#DeptID").chosen({width: "200px",
+    no_results_text: "Oops, nothing found!"
+  }).change(function() {
+    var Options = '<option value=""></option>';
+    var SchemeID = $('#SchemeID').data('SchemeID');
+    var SectorID = Number($(this).val());
+    var DeptID = Number($("#DeptID").val());
+    $.each(SchemeID.Data,
+            function(index, value) {
+              if ((value.SectorID === SectorID) && (value.DeptID === DeptID))
+              {
+                Options += '<option value="' + value.SchemeID + '">'
+                        + value.SchemeID + ' - ' + value.SchemeName
+                        + '</option>';
+              }
+            });
+    $('#SchemeID').html(Options)
+            .trigger("chosen:updated");
+  });
+  //filter
+  $("#SchemeID").chosen({width: "200px",
+    no_results_text: "Oops, nothing found!"
+  });
 
   $.ajax({
     type: 'POST',
@@ -70,55 +107,6 @@ $(function() {
               .trigger("chosen:updated");
       $('#SchemeID').data('SchemeID', DataResp.SchemeID);
 
-      //
-      Options = '<option value=""></option>';
-      $.each(DataResp.ProjectID.Data,
-              function(index, value) {
-                Options += '<option value="' + value.ProjectID + '">'
-                        + '</option>';
-              });
-      $('#ProjectID').html(Options)
-              .trigger("chosen:updated");
-      $('#ProjectID').data('ProjectID', DataResp.ProjectID);
-      //filter
-      $("#SectorID,#DeptID").chosen({width: "200px",
-        no_results_text: "Oops, nothing found!"})
-              .change(function() {
-                var Options = '<option value=""></option>';
-                var SchemeID = $('#SchemeID').data('SchemeID');
-                var SectorID = Number($(this).val());
-                var DeptID = Number($(this).val());
-                $.each(SchemeID.Data,
-                        function(index, value) {
-                          if ((value.SectorID === SectorID) && (value.DeptID === DeptID))
-                          {
-                            Options += '<option value="' + value.SchemeID + '">'
-                                    + value.SchemeID + ' - ' + value.SchemeName
-                                    + '</option>';
-                          }
-                        });
-                $('#SchemeID').html(Options)
-                        .trigger("chosen:updated");
-              });
-      //filter
-      $("#SchemeID").chosen({width: "200px",
-        no_results_text: "Oops, nothing found!"})
-              .change(function() {
-                var Options = '<option value=""></option>';
-                var ProjectID = $('#ProjectID').data('ProjectID');
-                var SchemeID = Number($(this).val());
-                $.each(ProjectID.Data,
-                        function(index, value) {
-                          if (value.SchemeID === SchemeID) {
-                            Options += '<option value="' + value.ProjectID + '">'
-                                    + value.ProjectID + ' - ' + value.ProjectName
-                                    + '</option>';
-                          }
-                        });
-                $('#ProjectID').html(Options)
-                        .trigger("chosen:updated");
-              });
-
       delete DataResp;
       $("#Msg").html('');
     }
@@ -129,6 +117,7 @@ $(function() {
   }).fail(function(msg) {
     $('#Msg').html(msg);
   });
+
 });
 
 
@@ -146,9 +135,10 @@ function drawVisualization() {
       withCredentials: true
     },
     data: {
+      'AjaxToken': $('#AjaxToken').val(),
       'FormToken': $('#FormToken').val(),
-      'CmdSubmit': 'GetREPORTData',
-      'ProjectID': $('#ProjectID').val()
+      'CallAPI': 'GetReportTable',
+      'SchemeID': $('#SchemeID').val()
     }
   }).done(function(data) {
     try {
@@ -157,27 +147,34 @@ function drawVisualization() {
       $('#AjaxToken').val(DataResp.AjaxToken);
       $('#Msg').html(DataResp.Msg);
       $('#ED').html(DataResp.RT);
+
       var dataChart = new google.visualization.DataTable();
-      dataChart.addColumn('string', 'Month');
+      dataChart.addColumn('date', 'Date');
       dataChart.addColumn('number', 'Physical Progress');
       dataChart.addColumn('number', 'Financial Progress');
       dataChart.addRows(3);
-      dataChart.setValue(0, 0, 'January');
+      //dataChart.setValue(0, 0, 'January');
 
-//      var Options = '<option value=""></option>';
-//      $.each(DataResp.ProjectID,
-//              function(index, value) {
-//                Options += '<option value="' + value.SectorID + '">'
-//                        + value.PhysicalProgress + value.FinancialProgress
-//                        + '</option>';
+      var Options = '<option value=""></option>';
+      $.each(DataResp.Data,
+              function(index, value) {
+                var dt = new Date(value.ReportDate);
+                dataChart.setValue(0, 0, dt);
+                dataChart.setValue(0, 1, value.PhysicalProgress);
+                dataChart.setValue(0, 2, value.FinancialProgress);
+
 //                for (var i = 0; i <= DataResp.Data.length; i++)
 //                {
-//                  for (var j = 0; j <= 3; j++)
+//                  for (var j = 0; j <= 2; j++)
 //                  {
-//                    dataChart.setValue(i, j, PhysicalProgress.val());
+//                    dataChart.setValue(i, j, value.PhysicalProgress);
+//                    $('#Error').append("<span>i=" + i + ",j=" + j
+//                            + ":" + value.PhysicalProgress + "</span><br/>");
 //                  }
 //                }
-//              });
+              });
+      var formatter = new google.visualization.DateFormat({formatType: 'long'});
+      formatter.format(dataChart, 0);
       // Create and draw the visualization.
       var ac = new google.visualization.ComboChart(document.getElementById('visualization'));
       ac.draw(dataChart, {
@@ -185,7 +182,7 @@ function drawVisualization() {
         width: 600,
         height: 400,
         vAxis: {title: "Progress"},
-        hAxis: {title: "Month"},
+        //hAxis: {title: ""},
         seriesType: "bars",
         series: {5: {type: "line"}}
       });

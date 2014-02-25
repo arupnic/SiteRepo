@@ -64,11 +64,6 @@ WebLib::IncludeJS('mpr/js/Reports.js');
           </select>
         </div>
         <div class="FieldGroup">
-          <label for="ProjectName"><strong>Project Name</strong></label><br/>
-          <select name="ProjectID" id="ProjectID" data-placeholder="Select Project">
-          </select>
-        </div>
-        <div class="FieldGroup">
           <br/>
           <input type="button" id="CmdRefresh" name="CmdRefresh" value="Refresh"/>
           <input type="hidden" id="FormToken"
