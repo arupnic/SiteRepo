@@ -4,7 +4,7 @@ require_once __DIR__ . '/PDF.php';
 WebLib::AuthSession();
 
 if (WebLib::GetVal($_POST, 'FormName') === 'Download') {
-  $pdf       = new SRER_PDF();
+  $pdf       = new ATRG_PDF();
   $Query     = 'SELECT DATE_FORMAT(`InDateTime`,"%d-%m-%Y %W") as `Attendance Date`, '
       . ' DATE_FORMAT(`InDateTime`,"%r") as `In Time`, '
       . ' DATE_FORMAT(`OutDateTime`,"%r") as `Out Time` '
@@ -15,10 +15,19 @@ if (WebLib::GetVal($_POST, 'FormName') === 'Download') {
       . ' ORDER BY `AtndID`';
   $ColWidths = array(
       array('Attendance Date', 'In Time', 'Out Time'),
-      array(37, 25, 35)
+      array(53, 53, 53)
   );
+
+
+  $Month     = substr(WebLib::GetVal($_POST, 'MonYr'), 0, 2);
+  $Year      = substr(WebLib::GetVal($_POST, 'MonYr'), -4);
+  $AtndMonth = date("F", mktime(0, 0, 0, $Month, 7, $Year)) . " - " . $Year;
+  $Name      = WebLib::GetVal($_SESSION, 'UserName');
+  //WebLib::GetVal($_POST, 'MonYr');
   $pdf->cols = $ColWidths;
   $pdf->SetTitle($AttendanceReport);
+  $pdf->SetTitle($AtndMonth);
+  $pdf->Setauthor($Name);
   $pdf->AddPage();
   $pdf->Details($Query, 0);
   $pdf->Output('AttendanceRegister-'
@@ -28,6 +37,11 @@ if (WebLib::GetVal($_POST, 'FormName') === 'Download') {
 
 WebLib::Html5Header('Attendance Report');
 WebLib::IncludeCSS();
+WebLib::IncludeCSS();
+WebLib::JQueryInclude();
+WebLib::IncludeCSS('css/chosen.css');
+WebLib::IncludeJS('js/chosen.jquery.min.js');
+WebLib::IncludeJS('atnd-reg/Report.js');
 
 $Data  = new MySQLiDB();
 ?>
@@ -49,19 +63,23 @@ $Data  = new MySQLiDB();
     <form name="frmAtndRpt" method="post" action="<?php
     echo WebLib::GetVal($_SERVER, 'PHP_SELF');
     ?>">
-      <label for="textfield">Month:</label>
-      <select name="MonYr">
-        <?php
-        $Query = 'Select DATE_FORMAT(`InDateTime`,"%m-%Y") as `MonYr`,'
-            . ' DATE_FORMAT(`InDateTime`,"%b-%Y") as `MonthYear` '
-            . ' FROM `' . MySQL_Pre . 'ATND_Register`'
-            . ' Where `UserMapID`=' . $_SESSION['UserMapID']
-            . ' GROUP BY DATE_FORMAT(`InDateTime`,"%m-%Y")';
-        $Data->show_sel('MonYr', 'MonthYear', $Query,
-                        WebLib::GetVal($_POST, 'MonYr'));
-        ?>
-      </select>
-      <?php //echo $Query;        ?>
+      <div class="FieldGroup">
+        <label for="OfficeSL">
+          <label for="textfield"><strong>Month:</strong></label>
+        </label>
+        <select id="MonYr" name="MonYr"
+                data-placeholder="Select Month"  />
+                <?php
+                $Query = 'Select DATE_FORMAT(`InDateTime`,"%m-%Y") as `MonYr`,'
+                    . ' DATE_FORMAT(`InDateTime`,"%b-%Y") as `MonthYear` '
+                    . ' FROM `' . MySQL_Pre . 'ATND_Register`'
+                    . ' Where `UserMapID`=' . $_SESSION['UserMapID']
+                    . ' GROUP BY DATE_FORMAT(`InDateTime`,"%m-%Y")';
+                $Data->show_sel('MonYr', 'MonthYear', $Query,
+                                WebLib::GetVal($_POST, 'MonYr'));
+                ?>
+        </select>
+      </div>
       <input type="submit" name="FormName" value="Show" />
       <input type="submit" name="FormName" value="Download" />
       <hr /><br />

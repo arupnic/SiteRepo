@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../FPDF/pdf.inc.php';
 
-class SRER_PDF extends PDF {
+class ATRG_PDF extends PDF {
 
   public $Query;
   public $maxln;
@@ -12,12 +12,12 @@ class SRER_PDF extends PDF {
   public $fh           = 3.5;
   private $PrintHeader = true;
 
-  function SRER_PDF() {
+  function ATRG_PDF() {
     $this->FPDF('P');
     $this->SetAuthor('Attendance Register 2014 Paschim Medinipur 1.0');
     $this->SetCreator('NIC Paschim Medinipur');
     $this->AliasNbPages();
-    $this->SetMargins(40, 5, 5);
+    $this->SetMargins(25, 6, 25);
     $this->SetAutoPageBreak(true, 5);
   }
 
@@ -58,7 +58,7 @@ class SRER_PDF extends PDF {
     $this->PreFooter();
     //Text color in gray
     $this->SetTextColor(128);
-    $this->SetFont('Arial', '', 5);
+    $this->SetFont('Arial', '', 8);
     $this->Cell(0, 0, date("d/m/Y g:i:s A", time() + (15 * 60)), 0, 1, 'L');
     $this->Cell(0, 0,
                 "Designed and Developed By National Informatics Centre, Paschim Medinipur",
@@ -155,8 +155,10 @@ class SRER_PDF extends PDF {
     $this->SetAutoPageBreak(true, 20);
     $this->SetFont('Arial', 'B', 10);
     $this->SetTextColor(0);
-    $this->Cell(0, 5, "Attendance Register", 0, 1, "C");
-    $this->Cell(0, 6, $this->title, 0, 1, "C");
+    $this->Cell(0, 6, "Attendance Register", 1, 1, "C");
+    $this->Cell(0, 5, "", 0, 1, "C");
+    $this->Cell(0, 0, "Month: $this->title", 0, 1, "L");
+    $this->Cell(0, 0, "Name: $this->author", 0, 1, "R");
     $this->SetFont('Arial', 'B', 8);
     $this->Cell(0, 5, $_SESSION['PDFName'], 0, 1, "C");
   }
