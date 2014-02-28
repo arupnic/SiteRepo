@@ -5,7 +5,7 @@ WebLib::AuthSession();
 
 if (WebLib::GetVal($_POST, 'FormName') === 'Download') {
   $pdf       = new ATRG_PDF();
-  $Query     = 'SELECT DATE_FORMAT(`InDateTime`,"%d-%m-%Y %W") as `Attendance Date`, '
+  $Query     = 'SELECT 1,DATE_FORMAT(`InDateTime`,"%d-%m-%Y %W") as `Attendance Date`, '
       . ' DATE_FORMAT(`InDateTime`,"%r") as `In Time`, '
       . ' DATE_FORMAT(`OutDateTime`,"%r") as `Out Time` '
       . ' FROM `' . MySQL_Pre . 'ATND_Register`'
@@ -14,11 +14,9 @@ if (WebLib::GetVal($_POST, 'FormName') === 'Download') {
       . ' AND `UserMapID`=' . $_SESSION['UserMapID']
       . ' ORDER BY `AtndID`';
   $ColWidths = array(
-      array('Attendance Date', 'In Time', 'Out Time'),
-      array(53, 53, 53)
+      array('Sl No.', 'Attendance Date', 'In Time', 'Out Time'),
+      array(11, 59, 59, 59)
   );
-
-
   $Month     = substr(WebLib::GetVal($_POST, 'MonYr'), 0, 2);
   $Year      = substr(WebLib::GetVal($_POST, 'MonYr'), -4);
   $AtndMonth = date("F", mktime(0, 0, 0, $Month, 7, $Year)) . " - " . $Year;
@@ -26,10 +24,10 @@ if (WebLib::GetVal($_POST, 'FormName') === 'Download') {
   //WebLib::GetVal($_POST, 'MonYr');
   $pdf->cols = $ColWidths;
   $pdf->SetTitle($AttendanceReport);
-  $pdf->SetTitle($AtndMonth);
   $pdf->Setauthor($Name);
+  $pdf->SetTitle($AtndMonth);
   $pdf->AddPage();
-  $pdf->Details($Query, 0);
+  $pdf->Details($Query, 1);
   $pdf->Output('AttendanceRegister-'
       . WebLib::GetVal($_POST, 'MonYr', true) . ".pdf", "D");
   exit();

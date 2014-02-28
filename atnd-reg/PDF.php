@@ -17,7 +17,7 @@ class ATRG_PDF extends PDF {
     $this->SetAuthor('Attendance Register 2014 Paschim Medinipur 1.0');
     $this->SetCreator('NIC Paschim Medinipur');
     $this->AliasNbPages();
-    $this->SetMargins(25, 6, 25);
+    $this->SetMargins(10, 5, 10);
     $this->SetAutoPageBreak(true, 5);
   }
 
@@ -41,7 +41,7 @@ class ATRG_PDF extends PDF {
       //$this->Ln();
       $this->PreHeader();
       $i   = 0;
-      $this->SetFont('Arial', 'B', 8);
+      $this->SetFont('Arial', 'B', 9);
       $this->SetLineWidth(0.3);
       $this->SetColW($this->cols[1]);
       $row = $this->SplitLn($this->cols[0], 0);
@@ -58,13 +58,13 @@ class ATRG_PDF extends PDF {
     $this->PreFooter();
     //Text color in gray
     $this->SetTextColor(128);
-    $this->SetFont('Arial', '', 8);
+    $this->SetFont('Arial', '', 7);
     $this->Cell(0, 0, date("d/m/Y g:i:s A", time() + (15 * 60)), 0, 1, 'L');
     $this->Cell(0, 0,
                 "Designed and Developed By National Informatics Centre, Paschim Medinipur",
                 0, 1, 'C');
     //Arial italic 8
-    $this->SetFont('Arial', 'I', 6);
+    $this->SetFont('Arial', 'I', 7);
     //Page number
     $this->Cell(0, 0, 'Page: ' . $this->PageNo() . ' of {nb}', 0, 1, 'R');
   }
@@ -88,7 +88,6 @@ class ATRG_PDF extends PDF {
     if (($this->GetStringWidth($s) + 2) > $w) {
       $ox = $this->GetX();
       $oy = $this->GetY();
-
       $x  = $this->GetX();
       $y  = $this->GetY();
       $r  = ((substr_count($s, '|') > 0 ? substr_count($s, '|') + 1 : 1));
@@ -120,7 +119,7 @@ class ATRG_PDF extends PDF {
   function Details($Query,
                    $SlNo = 1,
                    $lw = 0.1,
-                   $fw = 6) {
+                   $fw = 8) {
     $this->SetFont('Arial', '', $fw);
     $this->SetLineWidth($lw);
     $Data = new MySQLiDB();
@@ -136,10 +135,15 @@ class ATRG_PDF extends PDF {
           $this->AddPage();
           $this->maxln = $maxln;
         }
-        if (($i == 0) && ($SlNo == 1))
+        if (($i == 0) && ($SlNo == 1)) {
           $this->Wrap($this->colw[$i], $c);
-        else
-          $this->Wrap($this->colw[$i], $row[$i]);
+        } else {
+          if (($i == 1) && ($SlNo == 1)) {
+            $this->Wrap($this->colw[$i], $row[$i], 1, 'L');
+          } else {
+            $this->Wrap($this->colw[$i], $row[$i]);
+          }
+        }
         $i++;
       }
       $c++;
@@ -153,12 +157,13 @@ class ATRG_PDF extends PDF {
 
   function PreHeader() {
     $this->SetAutoPageBreak(true, 20);
-    $this->SetFont('Arial', 'B', 10);
+    $this->SetFont('Arial', 'B', 13);
     $this->SetTextColor(0);
-    $this->Cell(0, 6, "Attendance Register", 1, 1, "C");
+    $this->Cell(0, 6, "Attendance Register", 0, 1, "C");
+    $this->SetFont('Arial', 'B', 12);
     $this->Cell(0, 5, "", 0, 1, "C");
-    $this->Cell(0, 0, "Month: $this->title", 0, 1, "L");
-    $this->Cell(0, 0, "Name: $this->author", 0, 1, "R");
+    $this->Cell(0, 0, "Name: $this->author", 0, 1, "L");
+    $this->Cell(0, 0, "Month: $this->title", 0, 1, "R");
     $this->SetFont('Arial', 'B', 8);
     $this->Cell(0, 5, $_SESSION['PDFName'], 0, 1, "C");
   }
